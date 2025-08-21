@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "s2m7QGwHP7w=",
+  "success": true,
+  "projectFilePath": "/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/BilliardShop.Application.csproj",
+  "expectedPackageFiles": [
+    "/home/luckyboiz/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.8/microsoft.aspnetcore.app.ref.9.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,11 @@
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/bin/Debug/net9.0/BilliardShop.Domain.deps.json
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/bin/Debug/net9.0/BilliardShop.Domain.dll
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/bin/Debug/net9.0/BilliardShop.Domain.pdb
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.AssemblyInfoInputs.cache
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.AssemblyInfo.cs
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.csproj.CoreCompileInputs.cache
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.dll
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/refint/BilliardShop.Domain.dll
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.pdb
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/ref/BilliardShop.Domain.dll
