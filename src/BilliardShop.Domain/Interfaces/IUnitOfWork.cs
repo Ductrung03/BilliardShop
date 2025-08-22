@@ -1,13 +1,14 @@
 using BilliardShop.Domain.Entities;
+using BilliardShop.Domain.Interfaces.Repositories;
 
 namespace BilliardShop.Domain.Interfaces;
 
 public interface IUnitOfWork : IDisposable
 {
-    // User Management Repositories
-    IGenericRepository<VaiTroNguoiDung> VaiTroNguoiDungRepository { get; }
-    IGenericRepository<NguoiDung> NguoiDungRepository { get; }
-    IGenericRepository<DiaChiNguoiDung> DiaChiNguoiDungRepository { get; }
+    // User Management Repositories - Updated with specific interfaces
+    IVaiTroNguoiDungRepository VaiTroNguoiDungRepository { get; }
+    INguoiDungRepository NguoiDungRepository { get; }
+    IDiaChiNguoiDungRepository DiaChiNguoiDungRepository { get; }
 
     // Product Management Repositories
     IGenericRepository<DanhMucSanPham> DanhMucSanPhamRepository { get; }

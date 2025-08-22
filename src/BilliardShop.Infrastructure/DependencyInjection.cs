@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BilliardShop.Domain.Interfaces;
+using BilliardShop.Domain.Interfaces.Repositories;
 using BilliardShop.Infrastructure.Data;
 using BilliardShop.Infrastructure.Repositories;
 
@@ -23,6 +24,11 @@ public static class DependencyInjection
 
         // Register Generic Repository
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        // Register Specific Repositories
+        services.AddScoped<IVaiTroNguoiDungRepository, VaiTroNguoiDungRepository>();
+        services.AddScoped<INguoiDungRepository, NguoiDungRepository>();
+        services.AddScoped<IDiaChiNguoiDungRepository, DiaChiNguoiDungRepository>();
 
         // Register Unit of Work
         services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using BilliardShop.Domain.Entities;
 using BilliardShop.Domain.Interfaces;
+using BilliardShop.Domain.Interfaces.Repositories;
 using BilliardShop.Infrastructure.Data;
 
 namespace BilliardShop.Infrastructure.Repositories;
@@ -11,10 +12,10 @@ public class UnitOfWork : IUnitOfWork
     private IDbContextTransaction? _transaction;
     private bool _disposed = false;
 
-    // User Management Repositories
-    private IGenericRepository<VaiTroNguoiDung>? _vaiTroNguoiDungRepository;
-    private IGenericRepository<NguoiDung>? _nguoiDungRepository;
-    private IGenericRepository<DiaChiNguoiDung>? _diaChiNguoiDungRepository;
+    // User Management Repositories - Updated with specific interfaces
+    private IVaiTroNguoiDungRepository? _vaiTroNguoiDungRepository;
+    private INguoiDungRepository? _nguoiDungRepository;
+    private IDiaChiNguoiDungRepository? _diaChiNguoiDungRepository;
 
     // Product Management Repositories
     private IGenericRepository<DanhMucSanPham>? _danhMucSanPhamRepository;
@@ -54,15 +55,15 @@ public class UnitOfWork : IUnitOfWork
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    // User Management Repository Properties
-    public IGenericRepository<VaiTroNguoiDung> VaiTroNguoiDungRepository
-        => _vaiTroNguoiDungRepository ??= new GenericRepository<VaiTroNguoiDung>(_context);
+    // User Management Repository Properties - Updated with specific implementations
+    public IVaiTroNguoiDungRepository VaiTroNguoiDungRepository
+        => _vaiTroNguoiDungRepository ??= new VaiTroNguoiDungRepository(_context);
 
-    public IGenericRepository<NguoiDung> NguoiDungRepository
-        => _nguoiDungRepository ??= new GenericRepository<NguoiDung>(_context);
+    public INguoiDungRepository NguoiDungRepository
+        => _nguoiDungRepository ??= new NguoiDungRepository(_context);
 
-    public IGenericRepository<DiaChiNguoiDung> DiaChiNguoiDungRepository
-        => _diaChiNguoiDungRepository ??= new GenericRepository<DiaChiNguoiDung>(_context);
+    public IDiaChiNguoiDungRepository DiaChiNguoiDungRepository
+        => _diaChiNguoiDungRepository ??= new DiaChiNguoiDungRepository(_context);
 
     // Product Management Repository Properties
     public IGenericRepository<DanhMucSanPham> DanhMucSanPhamRepository
