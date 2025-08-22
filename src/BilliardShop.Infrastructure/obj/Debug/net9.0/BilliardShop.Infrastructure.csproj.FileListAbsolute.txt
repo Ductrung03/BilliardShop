@@ -1,4 +1,5 @@
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/bin/Debug/net9.0/BilliardShop.Infrastructure.deps.json
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/bin/Debug/net9.0/BilliardShop.Infrastructure.runtimeconfig.json
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/bin/Debug/net9.0/BilliardShop.Infrastructure.dll
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/bin/Debug/net9.0/BilliardShop.Infrastructure.pdb
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/bin/Debug/net9.0/BilliardShop.Application.dll
@@ -10,11 +11,10 @@
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/BilliardShop.Infrastructure.AssemblyInfoInputs.cache
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/BilliardShop.Infrastructure.AssemblyInfo.cs
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/BilliardShop.Infrastructure.csproj.CoreCompileInputs.cache
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/BilliardShop.Infrastructure.sourcelink.json
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/Billiard.01E50F40.Up2Date
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/BilliardShop.Infrastructure.dll
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/refint/BilliardShop.Infrastructure.dll
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/BilliardShop.Infrastructure.pdb
-/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/ref/BilliardShop.Infrastructure.dll
-/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/bin/Debug/net9.0/BilliardShop.Infrastructure.runtimeconfig.json
-/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/BilliardShop.Infrastructure.sourcelink.json
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/BilliardShop.Infrastructure.genruntimeconfig.cache
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Infrastructure/obj/Debug/net9.0/ref/BilliardShop.Infrastructure.dll

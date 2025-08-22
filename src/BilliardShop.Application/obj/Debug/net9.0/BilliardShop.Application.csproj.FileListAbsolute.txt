@@ -8,9 +8,9 @@
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/BilliardShop.Application.AssemblyInfoInputs.cache
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/BilliardShop.Application.AssemblyInfo.cs
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/BilliardShop.Application.csproj.CoreCompileInputs.cache
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/BilliardShop.Application.sourcelink.json
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/Billiard.C3D4031B.Up2Date
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/BilliardShop.Application.dll
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/refint/BilliardShop.Application.dll
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/BilliardShop.Application.pdb
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/ref/BilliardShop.Application.dll
-/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/BilliardShop.Application.sourcelink.json

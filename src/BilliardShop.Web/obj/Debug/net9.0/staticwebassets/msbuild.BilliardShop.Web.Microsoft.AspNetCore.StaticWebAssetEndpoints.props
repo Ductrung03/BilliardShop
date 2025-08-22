@@ -4,13 +4,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\BilliardShop.Web.x7pyo6foso.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-LZTD7L6UsD8OiNpb36ypnkGj8OawB95qA3EW\u002BoKtUhw="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1085"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022LZTD7L6UsD8OiNpb36ypnkGj8OawB95qA3EW\u002BoKtUhw=\u0022"},{"Name":"Last-Modified","Value":"Thu, 21 Aug 2025 02:35:49 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1085"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022LZTD7L6UsD8OiNpb36ypnkGj8OawB95qA3EW\u002BoKtUhw=\u0022"},{"Name":"Last-Modified","Value":"Fri, 22 Aug 2025 01:27:52 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/BilliardShop.Web/BilliardShop.Web.x7pyo6foso.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\BilliardShop.Web.x7pyo6foso.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"x7pyo6foso"},{"Name":"integrity","Value":"sha256-LZTD7L6UsD8OiNpb36ypnkGj8OawB95qA3EW\u002BoKtUhw="},{"Name":"label","Value":"_content/BilliardShop.Web/BilliardShop.Web.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1085"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022LZTD7L6UsD8OiNpb36ypnkGj8OawB95qA3EW\u002BoKtUhw=\u0022"},{"Name":"Last-Modified","Value":"Thu, 21 Aug 2025 02:35:49 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1085"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022LZTD7L6UsD8OiNpb36ypnkGj8OawB95qA3EW\u002BoKtUhw=\u0022"},{"Name":"Last-Modified","Value":"Fri, 22 Aug 2025 01:27:52 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/BilliardShop.Web/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
