@@ -44,11 +44,11 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<DanhSachYeuThich>? _danhSachYeuThichRepository;
     private IGenericRepository<GioHang>? _gioHangRepository;
 
-    // System Settings & Blog Repositories
-    private IGenericRepository<CaiDatHeThong>? _caiDatHeThongRepository;
+    // System Settings & Blog Repositories - Updated with specific interfaces
+    private ICaiDatHeThongRepository? _caiDatHeThongRepository;
     private IGenericRepository<BaiViet>? _baiVietRepository;
     private IGenericRepository<BinhLuanBaiViet>? _binhLuanBaiVietRepository;
-    private IGenericRepository<NhatKyHeThong>? _nhatKyHeThongRepository;
+    private INhatKyHeThongRepository? _nhatKyHeThongRepository;
 
     public UnitOfWork(BilliardShopDbContext context)
     {
@@ -121,9 +121,9 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<GioHang> GioHangRepository
         => _gioHangRepository ??= new GenericRepository<GioHang>(_context);
 
-    // System Settings & Blog Repository Properties
-    public IGenericRepository<CaiDatHeThong> CaiDatHeThongRepository
-        => _caiDatHeThongRepository ??= new GenericRepository<CaiDatHeThong>(_context);
+    // System Settings & Blog Repository Properties - Updated with specific implementations
+    public ICaiDatHeThongRepository CaiDatHeThongRepository
+        => _caiDatHeThongRepository ??= new CaiDatHeThongRepository(_context);
 
     public IGenericRepository<BaiViet> BaiVietRepository
         => _baiVietRepository ??= new GenericRepository<BaiViet>(_context);
@@ -131,8 +131,8 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<BinhLuanBaiViet> BinhLuanBaiVietRepository
         => _binhLuanBaiVietRepository ??= new GenericRepository<BinhLuanBaiViet>(_context);
 
-    public IGenericRepository<NhatKyHeThong> NhatKyHeThongRepository
-        => _nhatKyHeThongRepository ??= new GenericRepository<NhatKyHeThong>(_context);
+    public INhatKyHeThongRepository NhatKyHeThongRepository
+        => _nhatKyHeThongRepository ??= new NhatKyHeThongRepository(_context);
 
     // Transaction Methods
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

@@ -37,11 +37,11 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<DanhSachYeuThich> DanhSachYeuThichRepository { get; }
     IGenericRepository<GioHang> GioHangRepository { get; }
 
-    // System Settings & Blog Repositories
-    IGenericRepository<CaiDatHeThong> CaiDatHeThongRepository { get; }
+    // System Settings & Blog Repositories - Updated with specific interfaces
+    ICaiDatHeThongRepository CaiDatHeThongRepository { get; }
     IGenericRepository<BaiViet> BaiVietRepository { get; }
     IGenericRepository<BinhLuanBaiViet> BinhLuanBaiVietRepository { get; }
-    IGenericRepository<NhatKyHeThong> NhatKyHeThongRepository { get; }
+    INhatKyHeThongRepository NhatKyHeThongRepository { get; }
 
     // Transaction Methods
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

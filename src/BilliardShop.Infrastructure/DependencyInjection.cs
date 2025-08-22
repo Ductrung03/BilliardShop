@@ -29,6 +29,8 @@ public static class DependencyInjection
         services.AddScoped<IVaiTroNguoiDungRepository, VaiTroNguoiDungRepository>();
         services.AddScoped<INguoiDungRepository, NguoiDungRepository>();
         services.AddScoped<IDiaChiNguoiDungRepository, DiaChiNguoiDungRepository>();
+        services.AddScoped<ICaiDatHeThongRepository, CaiDatHeThongRepository>();
+        services.AddScoped<INhatKyHeThongRepository, NhatKyHeThongRepository>();
 
         // Register Unit of Work
         services.AddScoped<IUnitOfWork, UnitOfWork>();
