@@ -13,12 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilliardShop.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilliardShop.Web", "src\BilliardShop.Web\BilliardShop.Web.csproj", "{C0687D34-809C-4B70-863F-B939A94CEBEA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{38D0ED57-2DE0-4A0C-812A-A1DD9C1FB7D1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilliardShop.UnitTests", "tests\BilliardShop.UnitTests\BilliardShop.UnitTests.csproj", "{F1D10249-23DE-4F13-AB46-9B470C40F9CC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilliardShop.IntegrationTests", "tests\BilliardShop.IntegrationTests\BilliardShop.IntegrationTests.csproj", "{DF9329A6-D749-4EEE-941B-CA6DA435DB60}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,7 +52,5 @@ Global
 		{CFAE35E7-29A0-4F01-B4FD-E00F34E0C39D} = {D52721A4-98B1-4B63-A89C-6C8AB6084F4B}
 		{AD84F456-EDC1-47AA-802D-D91649B0B8AA} = {D52721A4-98B1-4B63-A89C-6C8AB6084F4B}
 		{C0687D34-809C-4B70-863F-B939A94CEBEA} = {D52721A4-98B1-4B63-A89C-6C8AB6084F4B}
-		{F1D10249-23DE-4F13-AB46-9B470C40F9CC} = {38D0ED57-2DE0-4A0C-812A-A1DD9C1FB7D1}
-		{DF9329A6-D749-4EEE-941B-CA6DA435DB60} = {38D0ED57-2DE0-4A0C-812A-A1DD9C1FB7D1}
 	EndGlobalSection
 EndGlobal

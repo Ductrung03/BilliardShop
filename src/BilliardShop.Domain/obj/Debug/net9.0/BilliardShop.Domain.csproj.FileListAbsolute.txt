@@ -9,3 +9,7 @@
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/refint/BilliardShop.Domain.dll
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.pdb
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/ref/BilliardShop.Domain.dll
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/bin/Debug/net9.0/BilliardShop.Domain.runtimeconfig.json
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.csproj.AssemblyReference.cache
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.sourcelink.json
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/obj/Debug/net9.0/BilliardShop.Domain.genruntimeconfig.cache

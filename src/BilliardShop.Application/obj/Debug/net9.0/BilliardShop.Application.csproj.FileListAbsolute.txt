@@ -13,3 +13,4 @@
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/refint/BilliardShop.Application.dll
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/BilliardShop.Application.pdb
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/ref/BilliardShop.Application.dll
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Application/obj/Debug/net9.0/BilliardShop.Application.sourcelink.json
