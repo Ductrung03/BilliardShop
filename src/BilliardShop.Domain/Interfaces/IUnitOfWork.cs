@@ -10,10 +10,10 @@ public interface IUnitOfWork : IDisposable
     INguoiDungRepository NguoiDungRepository { get; }
     IDiaChiNguoiDungRepository DiaChiNguoiDungRepository { get; }
 
-    // Product Management Repositories
-    IGenericRepository<DanhMucSanPham> DanhMucSanPhamRepository { get; }
-    IGenericRepository<ThuongHieu> ThuongHieuRepository { get; }
-    IGenericRepository<SanPham> SanPhamRepository { get; }
+    // Product Management Repositories - Updated with specific interfaces
+    IDanhMucSanPhamRepository DanhMucSanPhamRepository { get; }
+    IThuongHieuRepository ThuongHieuRepository { get; }
+    ISanPhamRepository SanPhamRepository { get; }
     IGenericRepository<HinhAnhSanPham> HinhAnhSanPhamRepository { get; }
     IGenericRepository<ThuocTinhSanPham> ThuocTinhSanPhamRepository { get; }
 

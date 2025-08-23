@@ -17,10 +17,10 @@ public class UnitOfWork : IUnitOfWork
     private INguoiDungRepository? _nguoiDungRepository;
     private IDiaChiNguoiDungRepository? _diaChiNguoiDungRepository;
 
-    // Product Management Repositories
-    private IGenericRepository<DanhMucSanPham>? _danhMucSanPhamRepository;
-    private IGenericRepository<ThuongHieu>? _thuongHieuRepository;
-    private IGenericRepository<SanPham>? _sanPhamRepository;
+   // Product Management Repositories - Updated with specific interfaces
+    private IDanhMucSanPhamRepository? _danhMucSanPhamRepository;
+    private IThuongHieuRepository? _thuongHieuRepository;
+    private ISanPhamRepository? _sanPhamRepository;
     private IGenericRepository<HinhAnhSanPham>? _hinhAnhSanPhamRepository;
     private IGenericRepository<ThuocTinhSanPham>? _thuocTinhSanPhamRepository;
 
@@ -50,6 +50,8 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<BinhLuanBaiViet>? _binhLuanBaiVietRepository;
     private INhatKyHeThongRepository? _nhatKyHeThongRepository;
 
+    
+
     public UnitOfWork(BilliardShopDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -65,15 +67,15 @@ public class UnitOfWork : IUnitOfWork
     public IDiaChiNguoiDungRepository DiaChiNguoiDungRepository
         => _diaChiNguoiDungRepository ??= new DiaChiNguoiDungRepository(_context);
 
-    // Product Management Repository Properties
-    public IGenericRepository<DanhMucSanPham> DanhMucSanPhamRepository
-        => _danhMucSanPhamRepository ??= new GenericRepository<DanhMucSanPham>(_context);
+     // Product Management Repository Properties - Updated with specific implementations
+    public IDanhMucSanPhamRepository DanhMucSanPhamRepository
+        => _danhMucSanPhamRepository ??= new DanhMucSanPhamRepository(_context);
 
-    public IGenericRepository<ThuongHieu> ThuongHieuRepository
-        => _thuongHieuRepository ??= new GenericRepository<ThuongHieu>(_context);
+    public IThuongHieuRepository ThuongHieuRepository
+        => _thuongHieuRepository ??= new ThuongHieuRepository(_context);
 
-    public IGenericRepository<SanPham> SanPhamRepository
-        => _sanPhamRepository ??= new GenericRepository<SanPham>(_context);
+    public ISanPhamRepository SanPhamRepository
+        => _sanPhamRepository ??= new SanPhamRepository(_context);
 
     public IGenericRepository<HinhAnhSanPham> HinhAnhSanPhamRepository
         => _hinhAnhSanPhamRepository ??= new GenericRepository<HinhAnhSanPham>(_context);

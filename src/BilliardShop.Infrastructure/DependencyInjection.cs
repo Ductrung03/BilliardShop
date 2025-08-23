@@ -25,10 +25,17 @@ public static class DependencyInjection
         // Register Generic Repository
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-        // Register Specific Repositories
+        // Register Specific Repositories - User Management
         services.AddScoped<IVaiTroNguoiDungRepository, VaiTroNguoiDungRepository>();
         services.AddScoped<INguoiDungRepository, NguoiDungRepository>();
         services.AddScoped<IDiaChiNguoiDungRepository, DiaChiNguoiDungRepository>();
+
+        // Register Specific Repositories - Product Management
+        services.AddScoped<IDanhMucSanPhamRepository, DanhMucSanPhamRepository>();
+        services.AddScoped<IThuongHieuRepository, ThuongHieuRepository>();
+        services.AddScoped<ISanPhamRepository, SanPhamRepository>();
+
+        // Register Specific Repositories - System
         services.AddScoped<ICaiDatHeThongRepository, CaiDatHeThongRepository>();
         services.AddScoped<INhatKyHeThongRepository, NhatKyHeThongRepository>();
 
