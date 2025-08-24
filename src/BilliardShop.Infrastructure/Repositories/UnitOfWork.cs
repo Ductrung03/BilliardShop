@@ -32,8 +32,8 @@ public class UnitOfWork : IUnitOfWork
     private ITrangThaiDonHangRepository? _trangThaiDonHangRepository;
     private IPhuongThucThanhToanRepository? _phuongThucThanhToanRepository;
     private IPhuongThucVanChuyenRepository? _phuongThucVanChuyenRepository;
-    private IGenericRepository<DonHang>? _donHangRepository;
-    private IGenericRepository<ChiTietDonHang>? _chiTietDonHangRepository;
+    private IDonHangRepository? _donHangRepository; // Changed type
+    private IChiTietDonHangRepository? _chiTietDonHangRepository;
 
     // Promotions & Discounts Repositories
     private IGenericRepository<MaGiamGia>? _maGiamGiaRepository;
@@ -90,19 +90,19 @@ public class UnitOfWork : IUnitOfWork
 
     // Order Management Repository Properties
     public ITrangThaiDonHangRepository TrangThaiDonHangRepository
-    => _trangThaiDonHangRepository ??= new TrangThaiDonHangRepository(_context);
+        => _trangThaiDonHangRepository ??= new TrangThaiDonHangRepository(_context);
 
-public IPhuongThucThanhToanRepository PhuongThucThanhToanRepository
-    => _phuongThucThanhToanRepository ??= new PhuongThucThanhToanRepository(_context);
+    public IPhuongThucThanhToanRepository PhuongThucThanhToanRepository
+        => _phuongThucThanhToanRepository ??= new PhuongThucThanhToanRepository(_context);
 
-public IPhuongThucVanChuyenRepository PhuongThucVanChuyenRepository
-    => _phuongThucVanChuyenRepository ??= new PhuongThucVanChuyenRepository(_context);
+    public IPhuongThucVanChuyenRepository PhuongThucVanChuyenRepository
+        => _phuongThucVanChuyenRepository ??= new PhuongThucVanChuyenRepository(_context);
 
-    public IGenericRepository<DonHang> DonHangRepository
-        => _donHangRepository ??= new GenericRepository<DonHang>(_context);
+    public IDonHangRepository DonHangRepository
+        => _donHangRepository ??= new DonHangRepository(_context); // Updated implementation
 
-    public IGenericRepository<ChiTietDonHang> ChiTietDonHangRepository
-        => _chiTietDonHangRepository ??= new GenericRepository<ChiTietDonHang>(_context);
+    public IChiTietDonHangRepository ChiTietDonHangRepository
+        => _chiTietDonHangRepository ??= new ChiTietDonHangRepository(_context);
 
     // Promotions & Discounts Repository Properties
     public IGenericRepository<MaGiamGia> MaGiamGiaRepository

@@ -25,8 +25,8 @@ public interface IUnitOfWork : IDisposable
     ITrangThaiDonHangRepository TrangThaiDonHangRepository { get; }
     IPhuongThucThanhToanRepository PhuongThucThanhToanRepository { get; }
     IPhuongThucVanChuyenRepository PhuongThucVanChuyenRepository { get; }
-    IGenericRepository<DonHang> DonHangRepository { get; }
-    IGenericRepository<ChiTietDonHang> ChiTietDonHangRepository { get; }
+    IDonHangRepository DonHangRepository { get; } 
+    IChiTietDonHangRepository ChiTietDonHangRepository { get; } 
 
     // Promotions & Discounts Repositories
     IGenericRepository<MaGiamGia> MaGiamGiaRepository { get; }

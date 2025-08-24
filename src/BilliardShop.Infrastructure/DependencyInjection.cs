@@ -29,6 +29,8 @@ public static class DependencyInjection
         services.AddScoped<ITrangThaiDonHangRepository, TrangThaiDonHangRepository>();
         services.AddScoped<IPhuongThucThanhToanRepository, PhuongThucThanhToanRepository>();
         services.AddScoped<IPhuongThucVanChuyenRepository, PhuongThucVanChuyenRepository>();
+        services.AddScoped<IDonHangRepository, DonHangRepository>();
+        services.AddScoped<IChiTietDonHangRepository, ChiTietDonHangRepository>();
 
         // Register Specific Repositories - User Management
         services.AddScoped<IVaiTroNguoiDungRepository, VaiTroNguoiDungRepository>();
