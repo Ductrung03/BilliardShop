@@ -34,6 +34,8 @@ public static class DependencyInjection
         services.AddScoped<IDanhMucSanPhamRepository, DanhMucSanPhamRepository>();
         services.AddScoped<IThuongHieuRepository, ThuongHieuRepository>();
         services.AddScoped<ISanPhamRepository, SanPhamRepository>();
+        services.AddScoped<IHinhAnhSanPhamRepository, HinhAnhSanPhamRepository>();
+        services.AddScoped<IThuocTinhSanPhamRepository, ThuocTinhSanPhamRepository>();
 
         // Register Specific Repositories - System
         services.AddScoped<ICaiDatHeThongRepository, CaiDatHeThongRepository>();

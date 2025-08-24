@@ -5,7 +5,7 @@ namespace BilliardShop.Domain.Interfaces;
 
 public interface IUnitOfWork : IDisposable
 {
-    // User Management Repositories - Updated with specific interfaces
+    // User Management Repositories
     IVaiTroNguoiDungRepository VaiTroNguoiDungRepository { get; }
     INguoiDungRepository NguoiDungRepository { get; }
     IDiaChiNguoiDungRepository DiaChiNguoiDungRepository { get; }
@@ -14,8 +14,8 @@ public interface IUnitOfWork : IDisposable
     IDanhMucSanPhamRepository DanhMucSanPhamRepository { get; }
     IThuongHieuRepository ThuongHieuRepository { get; }
     ISanPhamRepository SanPhamRepository { get; }
-    IGenericRepository<HinhAnhSanPham> HinhAnhSanPhamRepository { get; }
-    IGenericRepository<ThuocTinhSanPham> ThuocTinhSanPhamRepository { get; }
+    IHinhAnhSanPhamRepository HinhAnhSanPhamRepository { get; }
+    IThuocTinhSanPhamRepository ThuocTinhSanPhamRepository { get; }
 
     // Inventory Management Repositories
     IGenericRepository<NhaCungCap> NhaCungCapRepository { get; }
@@ -37,7 +37,7 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<DanhSachYeuThich> DanhSachYeuThichRepository { get; }
     IGenericRepository<GioHang> GioHangRepository { get; }
 
-    // System Settings & Blog Repositories - Updated with specific interfaces
+    // System Settings & Blog Repositories
     ICaiDatHeThongRepository CaiDatHeThongRepository { get; }
     IGenericRepository<BaiViet> BaiVietRepository { get; }
     IGenericRepository<BinhLuanBaiViet> BinhLuanBaiVietRepository { get; }

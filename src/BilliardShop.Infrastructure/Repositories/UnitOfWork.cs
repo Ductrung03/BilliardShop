@@ -12,17 +12,17 @@ public class UnitOfWork : IUnitOfWork
     private IDbContextTransaction? _transaction;
     private bool _disposed = false;
 
-    // User Management Repositories - Updated with specific interfaces
+    // User Management Repositories
     private IVaiTroNguoiDungRepository? _vaiTroNguoiDungRepository;
     private INguoiDungRepository? _nguoiDungRepository;
     private IDiaChiNguoiDungRepository? _diaChiNguoiDungRepository;
 
-   // Product Management Repositories - Updated with specific interfaces
+    // Product Management Repositories - Updated with specific interfaces
     private IDanhMucSanPhamRepository? _danhMucSanPhamRepository;
     private IThuongHieuRepository? _thuongHieuRepository;
     private ISanPhamRepository? _sanPhamRepository;
-    private IGenericRepository<HinhAnhSanPham>? _hinhAnhSanPhamRepository;
-    private IGenericRepository<ThuocTinhSanPham>? _thuocTinhSanPhamRepository;
+    private IHinhAnhSanPhamRepository? _hinhAnhSanPhamRepository;
+    private IThuocTinhSanPhamRepository? _thuocTinhSanPhamRepository;
 
     // Inventory Management Repositories
     private IGenericRepository<NhaCungCap>? _nhaCungCapRepository;
@@ -44,20 +44,18 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<DanhSachYeuThich>? _danhSachYeuThichRepository;
     private IGenericRepository<GioHang>? _gioHangRepository;
 
-    // System Settings & Blog Repositories - Updated with specific interfaces
+    // System Settings & Blog Repositories
     private ICaiDatHeThongRepository? _caiDatHeThongRepository;
     private IGenericRepository<BaiViet>? _baiVietRepository;
     private IGenericRepository<BinhLuanBaiViet>? _binhLuanBaiVietRepository;
     private INhatKyHeThongRepository? _nhatKyHeThongRepository;
-
-    
 
     public UnitOfWork(BilliardShopDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    // User Management Repository Properties - Updated with specific implementations
+    // User Management Repository Properties
     public IVaiTroNguoiDungRepository VaiTroNguoiDungRepository
         => _vaiTroNguoiDungRepository ??= new VaiTroNguoiDungRepository(_context);
 
@@ -67,7 +65,7 @@ public class UnitOfWork : IUnitOfWork
     public IDiaChiNguoiDungRepository DiaChiNguoiDungRepository
         => _diaChiNguoiDungRepository ??= new DiaChiNguoiDungRepository(_context);
 
-     // Product Management Repository Properties - Updated with specific implementations
+    // Product Management Repository Properties - Updated with specific implementations
     public IDanhMucSanPhamRepository DanhMucSanPhamRepository
         => _danhMucSanPhamRepository ??= new DanhMucSanPhamRepository(_context);
 
@@ -77,11 +75,11 @@ public class UnitOfWork : IUnitOfWork
     public ISanPhamRepository SanPhamRepository
         => _sanPhamRepository ??= new SanPhamRepository(_context);
 
-    public IGenericRepository<HinhAnhSanPham> HinhAnhSanPhamRepository
-        => _hinhAnhSanPhamRepository ??= new GenericRepository<HinhAnhSanPham>(_context);
+    public IHinhAnhSanPhamRepository HinhAnhSanPhamRepository
+        => _hinhAnhSanPhamRepository ??= new HinhAnhSanPhamRepository(_context);
 
-    public IGenericRepository<ThuocTinhSanPham> ThuocTinhSanPhamRepository
-        => _thuocTinhSanPhamRepository ??= new GenericRepository<ThuocTinhSanPham>(_context);
+    public IThuocTinhSanPhamRepository ThuocTinhSanPhamRepository
+        => _thuocTinhSanPhamRepository ??= new ThuocTinhSanPhamRepository(_context);
 
     // Inventory Management Repository Properties
     public IGenericRepository<NhaCungCap> NhaCungCapRepository
@@ -123,7 +121,7 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<GioHang> GioHangRepository
         => _gioHangRepository ??= new GenericRepository<GioHang>(_context);
 
-    // System Settings & Blog Repository Properties - Updated with specific implementations
+    // System Settings & Blog Repository Properties
     public ICaiDatHeThongRepository CaiDatHeThongRepository
         => _caiDatHeThongRepository ??= new CaiDatHeThongRepository(_context);
 
