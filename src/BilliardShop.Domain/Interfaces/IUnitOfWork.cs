@@ -33,7 +33,7 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<SuDungMaGiamGia> SuDungMaGiamGiaRepository { get; }
 
     // Customer Interactions Repositories
-    IGenericRepository<DanhGiaSanPham> DanhGiaSanPhamRepository { get; }
+    IDanhGiaSanPhamRepository DanhGiaSanPhamRepository { get; }
     IDanhSachYeuThichRepository DanhSachYeuThichRepository { get; }
     IGioHangRepository GioHangRepository { get; }
 

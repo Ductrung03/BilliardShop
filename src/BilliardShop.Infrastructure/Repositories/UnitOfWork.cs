@@ -40,7 +40,7 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<SuDungMaGiamGia>? _suDungMaGiamGiaRepository;
 
     // Customer Interactions Repositories
-    private IGenericRepository<DanhGiaSanPham>? _danhGiaSanPhamRepository;
+    private IDanhGiaSanPhamRepository? _danhGiaSanPhamRepository;
     private IDanhSachYeuThichRepository? _danhSachYeuThichRepository;
     private IGioHangRepository? _gioHangRepository;
 
@@ -112,8 +112,8 @@ public class UnitOfWork : IUnitOfWork
         => _suDungMaGiamGiaRepository ??= new GenericRepository<SuDungMaGiamGia>(_context);
 
     // Customer Interactions Repository Properties
-    public IGenericRepository<DanhGiaSanPham> DanhGiaSanPhamRepository
-        => _danhGiaSanPhamRepository ??= new GenericRepository<DanhGiaSanPham>(_context);
+    public IDanhGiaSanPhamRepository DanhGiaSanPhamRepository
+        => _danhGiaSanPhamRepository ??= new DanhGiaSanPhamRepository(_context);
 
     public IDanhSachYeuThichRepository DanhSachYeuThichRepository
         => _danhSachYeuThichRepository ??= new DanhSachYeuThichRepository(_context);
