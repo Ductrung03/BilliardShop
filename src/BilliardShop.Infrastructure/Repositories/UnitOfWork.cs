@@ -29,9 +29,9 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<BienDongKhoHang>? _bienDongKhoHangRepository;
 
     // Order Management Repositories
-    private IGenericRepository<TrangThaiDonHang>? _trangThaiDonHangRepository;
-    private IGenericRepository<PhuongThucThanhToan>? _phuongThucThanhToanRepository;
-    private IGenericRepository<PhuongThucVanChuyen>? _phuongThucVanChuyenRepository;
+    private ITrangThaiDonHangRepository? _trangThaiDonHangRepository;
+    private IPhuongThucThanhToanRepository? _phuongThucThanhToanRepository;
+    private IPhuongThucVanChuyenRepository? _phuongThucVanChuyenRepository;
     private IGenericRepository<DonHang>? _donHangRepository;
     private IGenericRepository<ChiTietDonHang>? _chiTietDonHangRepository;
 
@@ -89,14 +89,14 @@ public class UnitOfWork : IUnitOfWork
         => _bienDongKhoHangRepository ??= new GenericRepository<BienDongKhoHang>(_context);
 
     // Order Management Repository Properties
-    public IGenericRepository<TrangThaiDonHang> TrangThaiDonHangRepository
-        => _trangThaiDonHangRepository ??= new GenericRepository<TrangThaiDonHang>(_context);
+    public ITrangThaiDonHangRepository TrangThaiDonHangRepository
+    => _trangThaiDonHangRepository ??= new TrangThaiDonHangRepository(_context);
 
-    public IGenericRepository<PhuongThucThanhToan> PhuongThucThanhToanRepository
-        => _phuongThucThanhToanRepository ??= new GenericRepository<PhuongThucThanhToan>(_context);
+public IPhuongThucThanhToanRepository PhuongThucThanhToanRepository
+    => _phuongThucThanhToanRepository ??= new PhuongThucThanhToanRepository(_context);
 
-    public IGenericRepository<PhuongThucVanChuyen> PhuongThucVanChuyenRepository
-        => _phuongThucVanChuyenRepository ??= new GenericRepository<PhuongThucVanChuyen>(_context);
+public IPhuongThucVanChuyenRepository PhuongThucVanChuyenRepository
+    => _phuongThucVanChuyenRepository ??= new PhuongThucVanChuyenRepository(_context);
 
     public IGenericRepository<DonHang> DonHangRepository
         => _donHangRepository ??= new GenericRepository<DonHang>(_context);

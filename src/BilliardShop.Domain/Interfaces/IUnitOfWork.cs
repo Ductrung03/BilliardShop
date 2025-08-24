@@ -22,9 +22,9 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<BienDongKhoHang> BienDongKhoHangRepository { get; }
 
     // Order Management Repositories
-    IGenericRepository<TrangThaiDonHang> TrangThaiDonHangRepository { get; }
-    IGenericRepository<PhuongThucThanhToan> PhuongThucThanhToanRepository { get; }
-    IGenericRepository<PhuongThucVanChuyen> PhuongThucVanChuyenRepository { get; }
+    ITrangThaiDonHangRepository TrangThaiDonHangRepository { get; }
+    IPhuongThucThanhToanRepository PhuongThucThanhToanRepository { get; }
+    IPhuongThucVanChuyenRepository PhuongThucVanChuyenRepository { get; }
     IGenericRepository<DonHang> DonHangRepository { get; }
     IGenericRepository<ChiTietDonHang> ChiTietDonHangRepository { get; }
 
@@ -46,7 +46,7 @@ public interface IUnitOfWork : IDisposable
     // Transaction Methods
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     int SaveChanges();
-    
+
     // Transaction Management
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
