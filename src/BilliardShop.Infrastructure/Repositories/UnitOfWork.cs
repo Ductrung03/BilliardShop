@@ -17,7 +17,7 @@ public class UnitOfWork : IUnitOfWork
     private INguoiDungRepository? _nguoiDungRepository;
     private IDiaChiNguoiDungRepository? _diaChiNguoiDungRepository;
 
-    // Product Management Repositories - Updated with specific interfaces
+    // Product Management Repositories
     private IDanhMucSanPhamRepository? _danhMucSanPhamRepository;
     private IThuongHieuRepository? _thuongHieuRepository;
     private ISanPhamRepository? _sanPhamRepository;
@@ -32,7 +32,7 @@ public class UnitOfWork : IUnitOfWork
     private ITrangThaiDonHangRepository? _trangThaiDonHangRepository;
     private IPhuongThucThanhToanRepository? _phuongThucThanhToanRepository;
     private IPhuongThucVanChuyenRepository? _phuongThucVanChuyenRepository;
-    private IDonHangRepository? _donHangRepository; // Changed type
+    private IDonHangRepository? _donHangRepository;
     private IChiTietDonHangRepository? _chiTietDonHangRepository;
 
     // Promotions & Discounts Repositories
@@ -41,8 +41,8 @@ public class UnitOfWork : IUnitOfWork
 
     // Customer Interactions Repositories
     private IGenericRepository<DanhGiaSanPham>? _danhGiaSanPhamRepository;
-    private IGenericRepository<DanhSachYeuThich>? _danhSachYeuThichRepository;
-    private IGenericRepository<GioHang>? _gioHangRepository;
+    private IDanhSachYeuThichRepository? _danhSachYeuThichRepository;
+    private IGioHangRepository? _gioHangRepository;
 
     // System Settings & Blog Repositories
     private ICaiDatHeThongRepository? _caiDatHeThongRepository;
@@ -65,7 +65,7 @@ public class UnitOfWork : IUnitOfWork
     public IDiaChiNguoiDungRepository DiaChiNguoiDungRepository
         => _diaChiNguoiDungRepository ??= new DiaChiNguoiDungRepository(_context);
 
-    // Product Management Repository Properties - Updated with specific implementations
+    // Product Management Repository Properties
     public IDanhMucSanPhamRepository DanhMucSanPhamRepository
         => _danhMucSanPhamRepository ??= new DanhMucSanPhamRepository(_context);
 
@@ -99,7 +99,7 @@ public class UnitOfWork : IUnitOfWork
         => _phuongThucVanChuyenRepository ??= new PhuongThucVanChuyenRepository(_context);
 
     public IDonHangRepository DonHangRepository
-        => _donHangRepository ??= new DonHangRepository(_context); // Updated implementation
+        => _donHangRepository ??= new DonHangRepository(_context);
 
     public IChiTietDonHangRepository ChiTietDonHangRepository
         => _chiTietDonHangRepository ??= new ChiTietDonHangRepository(_context);
@@ -115,11 +115,11 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<DanhGiaSanPham> DanhGiaSanPhamRepository
         => _danhGiaSanPhamRepository ??= new GenericRepository<DanhGiaSanPham>(_context);
 
-    public IGenericRepository<DanhSachYeuThich> DanhSachYeuThichRepository
-        => _danhSachYeuThichRepository ??= new GenericRepository<DanhSachYeuThich>(_context);
+    public IDanhSachYeuThichRepository DanhSachYeuThichRepository
+        => _danhSachYeuThichRepository ??= new DanhSachYeuThichRepository(_context);
 
-    public IGenericRepository<GioHang> GioHangRepository
-        => _gioHangRepository ??= new GenericRepository<GioHang>(_context);
+    public IGioHangRepository GioHangRepository
+        => _gioHangRepository ??= new GioHangRepository(_context);
 
     // System Settings & Blog Repository Properties
     public ICaiDatHeThongRepository CaiDatHeThongRepository

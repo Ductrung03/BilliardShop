@@ -34,8 +34,8 @@ public interface IUnitOfWork : IDisposable
 
     // Customer Interactions Repositories
     IGenericRepository<DanhGiaSanPham> DanhGiaSanPhamRepository { get; }
-    IGenericRepository<DanhSachYeuThich> DanhSachYeuThichRepository { get; }
-    IGenericRepository<GioHang> GioHangRepository { get; }
+    IDanhSachYeuThichRepository DanhSachYeuThichRepository { get; }
+    IGioHangRepository GioHangRepository { get; }
 
     // System Settings & Blog Repositories
     ICaiDatHeThongRepository CaiDatHeThongRepository { get; }
