@@ -29,8 +29,8 @@ public interface IUnitOfWork : IDisposable
     IChiTietDonHangRepository ChiTietDonHangRepository { get; } 
 
     // Promotions & Discounts Repositories
-    IGenericRepository<MaGiamGia> MaGiamGiaRepository { get; }
-    IGenericRepository<SuDungMaGiamGia> SuDungMaGiamGiaRepository { get; }
+    IMaGiamGiaRepository MaGiamGiaRepository { get; }
+    ISuDungMaGiamGiaRepository SuDungMaGiamGiaRepository { get; }
 
     // Customer Interactions Repositories
     IDanhGiaSanPhamRepository DanhGiaSanPhamRepository { get; }
@@ -39,8 +39,8 @@ public interface IUnitOfWork : IDisposable
 
     // System Settings & Blog Repositories
     ICaiDatHeThongRepository CaiDatHeThongRepository { get; }
-    IGenericRepository<BaiViet> BaiVietRepository { get; }
-    IGenericRepository<BinhLuanBaiViet> BinhLuanBaiVietRepository { get; }
+    IBaiVietRepository BaiVietRepository { get; }
+    IBinhLuanBaiVietRepository BinhLuanBaiVietRepository { get; }
     INhatKyHeThongRepository NhatKyHeThongRepository { get; }
 
     // Transaction Methods

@@ -36,8 +36,8 @@ public class UnitOfWork : IUnitOfWork
     private IChiTietDonHangRepository? _chiTietDonHangRepository;
 
     // Promotions & Discounts Repositories
-    private IGenericRepository<MaGiamGia>? _maGiamGiaRepository;
-    private IGenericRepository<SuDungMaGiamGia>? _suDungMaGiamGiaRepository;
+    private IMaGiamGiaRepository? _maGiamGiaRepository;
+    private ISuDungMaGiamGiaRepository? _suDungMaGiamGiaRepository;
 
     // Customer Interactions Repositories
     private IDanhGiaSanPhamRepository? _danhGiaSanPhamRepository;
@@ -46,9 +46,10 @@ public class UnitOfWork : IUnitOfWork
 
     // System Settings & Blog Repositories
     private ICaiDatHeThongRepository? _caiDatHeThongRepository;
-    private IGenericRepository<BaiViet>? _baiVietRepository;
-    private IGenericRepository<BinhLuanBaiViet>? _binhLuanBaiVietRepository;
+    private IBaiVietRepository? _baiVietRepository;
+    private IBinhLuanBaiVietRepository? _binhLuanBaiVietRepository;
     private INhatKyHeThongRepository? _nhatKyHeThongRepository;
+
 
     public UnitOfWork(BilliardShopDbContext context)
     {
@@ -105,11 +106,11 @@ public class UnitOfWork : IUnitOfWork
         => _chiTietDonHangRepository ??= new ChiTietDonHangRepository(_context);
 
     // Promotions & Discounts Repository Properties
-    public IGenericRepository<MaGiamGia> MaGiamGiaRepository
-        => _maGiamGiaRepository ??= new GenericRepository<MaGiamGia>(_context);
+    public IMaGiamGiaRepository MaGiamGiaRepository
+        => _maGiamGiaRepository ??= new MaGiamGiaRepository(_context);
 
-    public IGenericRepository<SuDungMaGiamGia> SuDungMaGiamGiaRepository
-        => _suDungMaGiamGiaRepository ??= new GenericRepository<SuDungMaGiamGia>(_context);
+    public ISuDungMaGiamGiaRepository SuDungMaGiamGiaRepository
+        => _suDungMaGiamGiaRepository ??= new SuDungMaGiamGiaRepository(_context);
 
     // Customer Interactions Repository Properties
     public IDanhGiaSanPhamRepository DanhGiaSanPhamRepository
@@ -125,11 +126,11 @@ public class UnitOfWork : IUnitOfWork
     public ICaiDatHeThongRepository CaiDatHeThongRepository
         => _caiDatHeThongRepository ??= new CaiDatHeThongRepository(_context);
 
-    public IGenericRepository<BaiViet> BaiVietRepository
-        => _baiVietRepository ??= new GenericRepository<BaiViet>(_context);
+    public IBaiVietRepository BaiVietRepository
+        => _baiVietRepository ??= new BaiVietRepository(_context);
 
-    public IGenericRepository<BinhLuanBaiViet> BinhLuanBaiVietRepository
-        => _binhLuanBaiVietRepository ??= new GenericRepository<BinhLuanBaiViet>(_context);
+    public IBinhLuanBaiVietRepository BinhLuanBaiVietRepository
+        => _binhLuanBaiVietRepository ??= new BinhLuanBaiVietRepository(_context);
 
     public INhatKyHeThongRepository NhatKyHeThongRepository
         => _nhatKyHeThongRepository ??= new NhatKyHeThongRepository(_context);
