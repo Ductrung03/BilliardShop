@@ -25,8 +25,8 @@ public class UnitOfWork : IUnitOfWork
     private IThuocTinhSanPhamRepository? _thuocTinhSanPhamRepository;
 
     // Inventory Management Repositories
-    private IGenericRepository<NhaCungCap>? _nhaCungCapRepository;
-    private IGenericRepository<BienDongKhoHang>? _bienDongKhoHangRepository;
+    private INhaCungCapRepository? _nhaCungCapRepository;
+    private IBienDongKhoHangRepository? _bienDongKhoHangRepository;
 
     // Order Management Repositories
     private ITrangThaiDonHangRepository? _trangThaiDonHangRepository;
@@ -83,11 +83,11 @@ public class UnitOfWork : IUnitOfWork
         => _thuocTinhSanPhamRepository ??= new ThuocTinhSanPhamRepository(_context);
 
     // Inventory Management Repository Properties
-    public IGenericRepository<NhaCungCap> NhaCungCapRepository
-        => _nhaCungCapRepository ??= new GenericRepository<NhaCungCap>(_context);
+    public INhaCungCapRepository NhaCungCapRepository
+        => _nhaCungCapRepository ??= new NhaCungCapRepository(_context);
 
-    public IGenericRepository<BienDongKhoHang> BienDongKhoHangRepository
-        => _bienDongKhoHangRepository ??= new GenericRepository<BienDongKhoHang>(_context);
+    public IBienDongKhoHangRepository BienDongKhoHangRepository
+        => _bienDongKhoHangRepository ??= new BienDongKhoHangRepository(_context);
 
     // Order Management Repository Properties
     public ITrangThaiDonHangRepository TrangThaiDonHangRepository

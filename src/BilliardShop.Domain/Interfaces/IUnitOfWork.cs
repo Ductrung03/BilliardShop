@@ -18,8 +18,8 @@ public interface IUnitOfWork : IDisposable
     IThuocTinhSanPhamRepository ThuocTinhSanPhamRepository { get; }
 
     // Inventory Management Repositories
-    IGenericRepository<NhaCungCap> NhaCungCapRepository { get; }
-    IGenericRepository<BienDongKhoHang> BienDongKhoHangRepository { get; }
+    INhaCungCapRepository NhaCungCapRepository { get; }
+    IBienDongKhoHangRepository BienDongKhoHangRepository { get; }
 
     // Order Management Repositories
     ITrangThaiDonHangRepository TrangThaiDonHangRepository { get; }
