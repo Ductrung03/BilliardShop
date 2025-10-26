@@ -27,19 +27,19 @@ public class CartService : ICartService
         return Enumerable.Empty<GioHang>();
     }
 
-    public async Task<bool> AddToCartAsync(int? nguoiDungId, string? maPhienLamViec, int sanPhamId, int soLuong = 1)
+    public async Task AddToCartAsync(int? nguoiDungId, string? maPhienLamViec, int sanPhamId, int soLuong = 1)
     {
         // Kiểm tra sản phẩm tồn tại và còn hàng
         var sanPham = await _unitOfWork.SanPhamRepository.GetByIdAsync(sanPhamId);
         if (sanPham == null || !sanPham.TrangThaiHoatDong)
         {
-            return false;
+            return;
         }
 
         // Kiểm tra tồn kho
         if (sanPham.SoLuongTonKho < soLuong)
         {
-            return false;
+            return;
         }
 
         // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
@@ -61,7 +61,7 @@ public class CartService : ICartService
             // Kiểm tra lại tồn kho
             if (newQuantity > sanPham.SoLuongTonKho)
             {
-                return false;
+                return;
             }
 
             existingCartItem.SoLuong = newQuantity;
@@ -80,39 +80,33 @@ public class CartService : ICartService
 
             await _unitOfWork.GioHangRepository.AddAsync(gioHang);
         }
-
-        await _unitOfWork.SaveChangesAsync();
-        return true;
     }
 
-    public async Task<bool> UpdateQuantityAsync(int gioHangId, int newQuantity)
+    public async Task UpdateQuantityAsync(int gioHangId, int newQuantity)
     {
         if (newQuantity <= 0)
         {
-            return false;
+            return;
         }
 
         var gioHang = await _unitOfWork.GioHangRepository.GetByIdAsync(gioHangId);
         if (gioHang == null)
         {
-            return false;
+            return;
         }
 
         // Kiểm tra tồn kho
         var sanPham = await _unitOfWork.SanPhamRepository.GetByIdAsync(gioHang.MaSanPham);
         if (sanPham == null || newQuantity > sanPham.SoLuongTonKho)
         {
-            return false;
+            return;
         }
 
         gioHang.SoLuong = newQuantity;
         _unitOfWork.GioHangRepository.Update(gioHang);
-        await _unitOfWork.SaveChangesAsync();
-
-        return true;
     }
 
-    public async Task<bool> RemoveFromCartAsync(int? nguoiDungId, string? maPhienLamViec, int sanPhamId)
+    public async Task RemoveFromCartAsync(int? nguoiDungId, string? maPhienLamViec, int sanPhamId)
     {
         GioHang? cartItem = null;
 
@@ -127,13 +121,10 @@ public class CartService : ICartService
 
         if (cartItem == null)
         {
-            return false;
+            return;
         }
 
         _unitOfWork.GioHangRepository.Remove(cartItem);
-        await _unitOfWork.SaveChangesAsync();
-
-        return true;
     }
 
     public async Task<int> GetCartItemCountAsync(int? nguoiDungId, string? maPhienLamViec)
@@ -175,11 +166,6 @@ public class CartService : ICartService
         else if (!string.IsNullOrEmpty(maPhienLamViec))
         {
             deletedCount = await _unitOfWork.GioHangRepository.ClearCartBySessionAsync(maPhienLamViec);
-        }
-
-        if (deletedCount > 0)
-        {
-            await _unitOfWork.SaveChangesAsync();
         }
 
         return deletedCount > 0;

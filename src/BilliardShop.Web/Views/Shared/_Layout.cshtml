@@ -1,112 +1,53 @@
-﻿<!doctype html>
-<html class="no-js" lang="vi">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-    <meta name="theme-color" content="">
-
-    <title>@ViewData["Title"] - Billiard Shop</title>
-
-    @* Preconnect to external resources *@
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    @* Core CSS Files *@
-    <link rel="stylesheet" href="~/base.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/custom.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/product-card.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/swiper-bundle.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/custom-swiper.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="~/animate.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/placeholder.css" asp-append-version="true" />
-
-    @* Core JavaScript Files *@
-    <script src="~/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/swiper-bundle.min.js" asp-append-version="true"></script>
-    <script src="~/global.js" asp-append-version="true" defer></script>
-    <script src="~/jquery-cookie-min.js" asp-append-version="true"></script>
-    <script src="~/wow.min.js" asp-append-version="true"></script>
-
-    <script>
-        document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-
-        $(document).on('mousemove scroll', function(radialCursor){
-            x = radialCursor.pageX;
-            y = radialCursor.pageY - window.pageYOffset;
-            $("#dtTest").css("transform", "translate3d(" + x + "px, " + y + "px, " + "0)" );
-        });
-    </script>
-
-    @await RenderSectionAsync("Styles", required: false)
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@ViewData["Title"] - Billiard Shop</title>
+  <link rel="icon" href="~/lib/autozen/favicon.ico" type="image/x-icon">
+  <!-- Animation On Scroll (AOS) -->
+  <link rel="stylesheet" href="~/lib/autozen/css/vendor/aos.css" asp-append-version="true">
+  <!-- Bootstrap Icons CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Slick CSS -->
+  <link rel="stylesheet" href="~/lib/autozen/css/vendor/slick.css" asp-append-version="true">
+  <!-- FANCYBOX CSS  -->
+  <link rel="stylesheet" href="~/lib/autozen/css/vendor/fancybox.css" asp-append-version="true">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="~/lib/autozen/css/style.css" asp-append-version="true">
+  @await RenderSectionAsync("Styles", required: false)
 </head>
 
-<body id="@ViewData["BodyId"]" class="gradient template-@ViewData["Template"]">
-    <div id="dtTest"></div>
-    <div class="dt-custom-overlay"></div>
+<body>
+  
+  <partial name="_Header" />
 
-    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
-        Bỏ qua nội dung
-    </a>
+  <!-- Main Content -->
+  <main>
+    @RenderBody()
+  </main>
+  <!-- End Main Content -->
 
-    @* Mobile menu *@
-    <div class="mobile-menu" data-menu="dt-main-menu"> </div>
-    <div class="mobile-menu-overlay"></div>
+  <partial name="_Footer" />
 
-    @* Header *@
-    <partial name="_Header" />
-
-    @* Main Content *@
-    <main id="MainContent" class="content-for-layout focus-none placeholder-shadow-blocks" role="main" tabindex="-1">
-        @RenderBody()
-    </main>
-
-    @* Footer *@
-    <partial name="_Footer" />
-
-    <ul hidden>
-        <li id="a11y-refresh-page-message">Làm mới trang</li>
-    </ul>
-
-    @* Footer Scripts *@
-    <script src="~/dT_bundle_base.js" asp-append-version="true" defer></script>
-    <script src="~/dT_bundle.js" asp-append-version="true" defer></script>
-    <script src="~/dt_wishlist.js" asp-append-version="true" defer></script>
-    <script src="~/dt_compare.js" asp-append-version="true" defer></script>
-    <script src="~/dt-theme.js" asp-append-version="true" defer></script>
-
-    <script>
-        window.shopUrl = '@Url.Content("~")';
-        window.routes = {
-            cart_add_url: '@Url.Action("AddToCart", "Cart")',
-            cart_change_url: '@Url.Action("UpdateCart", "Cart")',
-            cart_update_url: '@Url.Action("UpdateCart", "Cart")',
-            cart_url: '@Url.Action("Index", "Cart")'
-        };
-
-        window.cartStrings = {
-            error: 'Có lỗi xảy ra với giỏ hàng',
-            quantityError: 'Số lượng không hợp lệ'
-        };
-
-        window.variantStrings = {
-            addToCart: 'Thêm vào giỏ',
-            soldOut: 'Hết hàng',
-            unavailable: 'Không có sẵn'
-        };
-
-        function debounce(func, timeout = 300){
-            let timer;
-            return (...args) => {
-                clearTimeout(timer);
-                timer = setTimeout(() => { func.apply(this, args); }, timeout);
-            };
-        }
-
-        new WOW().init();
-    </script>
-
-    @await RenderSectionAsync("Scripts", required: false)
+  <!-- Scripts -->
+  <!-- jQuery -->
+  <script src="~/lib/autozen/js/vendor/jquery.min.js" asp-append-version="true"></script>
+  <!-- Animation On Scroll (AOS) -->
+  <script src="~/lib/autozen/js/vendor/aos.js" asp-append-version="true"></script>
+  <!-- Slick JS -->
+  <script src="~/lib/autozen/js/vendor/slick.min.js" asp-append-version="true"></script>
+  <!-- FANCY BOX -->
+  <script src="~/lib/autozen/js/vendor/fancybox.umd.js" asp-append-version="true"></script>
+  <!-- Bootstrap JS -->
+  <script src="~/lib/autozen/js/vendor/bootstrap.bundle.min.js" asp-append-version="true"></script>
+  <!-- Custom JS -->
+  <script src="~/lib/autozen/js/script-counter.js" asp-append-version="true"></script>
+  <script src="~/lib/autozen/js/submit-form.js" asp-append-version="true"></script>
+  <script src="~/lib/autozen/js/script.js" asp-append-version="true"></script>
+  <!-- End Scripts -->
+  @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

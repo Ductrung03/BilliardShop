@@ -1,6 +1,7 @@
 using BilliardShop.Application.Interfaces;
 using BilliardShop.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using BilliardShop.Web.Controllers;
 
 namespace BilliardShop.Web.Controllers;
 
@@ -66,18 +67,49 @@ public class CartController : Controller
     public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
     {
         var sessionId = GetSessionId();
-        var result = await _cartService.AddToCartAsync(null, sessionId, productId, quantity);
-
-        if (result)
+        try
         {
-            TempData["Success"] = "Đã thêm sản phẩm vào giỏ hàng";
-        }
-        else
-        {
-            TempData["Error"] = "Không thể thêm sản phẩm vào giỏ hàng";
-        }
+            await _cartService.AddToCartAsync(null, sessionId, productId, quantity);
 
-        return RedirectToAction("Index");
+            var cartItems = await _cartService.GetCartItemsAsync(null, sessionId);
+            var viewModel = new CartViewModel();
+
+            foreach (var item in cartItems)
+            {
+                var product = await _productService.GetProductBySlugAsync(item.SanPham.DuongDanSanPham);
+                if (product != null)
+                {
+                    var cartItemVM = new CartItemViewModel
+                    {
+                        GioHangId = item.Id,
+                        SanPhamId = item.MaSanPham,
+                        TenSanPham = product.TenSanPham,
+                        DuongDanSanPham = product.DuongDanSanPham,
+                        HinhAnhUrl = product.HinhAnhs.FirstOrDefault()?.DuongDanHinhAnh,
+                        Gia = product.GiaGoc,
+                        GiaKhuyenMai = product.GiaKhuyenMai,
+                        SoLuong = item.SoLuong,
+                        SoLuongTonKho = product.SoLuongTonKho
+                    };
+                    viewModel.Items.Add(cartItemVM);
+                }
+            }
+
+            viewModel.SubTotal = viewModel.Items.Sum(i => i.ThanhTien);
+
+            return Json(new
+            {
+                success = true,
+                message = "Đã thêm sản phẩm vào giỏ hàng",
+                html = await this.RenderViewToStringAsync("_CartItems", viewModel),
+                count = viewModel.Items.Count,
+                subTotal = viewModel.SubTotal
+            });
+        }
+        catch (Exception)
+        {
+            return Json(new { success = false, message = "Không thể thêm sản phẩm vào giỏ hàng" });
+        }
     }
 
     [HttpPost]
@@ -88,29 +120,30 @@ public class CartController : Controller
             return Json(new { success = false, message = "Số lượng không hợp lệ" });
         }
 
-        var result = await _cartService.UpdateQuantityAsync(cartItemId, quantity);
-
-        if (result)
+        try
         {
+            await _cartService.UpdateQuantityAsync(cartItemId, quantity);
+
             var sessionId = GetSessionId();
             var total = await _cartService.GetCartTotalAsync(null, sessionId);
             return Json(new { success = true, total });
         }
-
-        return Json(new { success = false, message = "Không thể cập nhật số lượng" });
+        catch (Exception)
+        {
+            return Json(new { success = false, message = "Không thể cập nhật số lượng" });
+        }
     }
 
     [HttpPost]
     public async Task<IActionResult> RemoveFromCart(int productId)
     {
         var sessionId = GetSessionId();
-        var result = await _cartService.RemoveFromCartAsync(null, sessionId, productId);
-
-        if (result)
+        try
         {
+            await _cartService.RemoveFromCartAsync(null, sessionId, productId);
             TempData["Success"] = "Đã xóa sản phẩm khỏi giỏ hàng";
         }
-        else
+        catch (Exception)
         {
             TempData["Error"] = "Không thể xóa sản phẩm";
         }
