@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "UgxszOoAMuI=",
+  "dgSpecHash": "4rQG5AR4O4E=",
   "success": true,
   "projectFilePath": "/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Domain/BilliardShop.Domain.csproj",
   "expectedPackageFiles": [
@@ -83,7 +83,7 @@
     "/home/luckyboiz/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512",
     "/home/luckyboiz/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/home/luckyboiz/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512",
-    "/home/luckyboiz/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.8/microsoft.aspnetcore.app.ref.9.0.8.nupkg.sha512"
+    "/home/luckyboiz/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.9/microsoft.aspnetcore.app.ref.9.0.9.nupkg.sha512"
   ],
   "logs": []
 }

@@ -62,6 +62,9 @@ public class BilliardShopDbContext : DbContext
         // Configure primary keys to match SQL Server identity columns
         ConfigurePrimaryKeys(modelBuilder);
 
+        // Configure audit fields to match database schema
+        ConfigureAuditFields(modelBuilder);
+
         // Configure indexes
         ConfigureIndexes(modelBuilder);
 
@@ -124,6 +127,88 @@ public class BilliardShopDbContext : DbContext
         modelBuilder.Entity<BaiViet>().Property(e => e.Id).HasColumnName("MaBaiViet");
         modelBuilder.Entity<BinhLuanBaiViet>().Property(e => e.Id).HasColumnName("MaBinhLuan");
         modelBuilder.Entity<NhatKyHeThong>().Property(e => e.Id).HasColumnName("MaNhatKy");
+    }
+
+    private static void ConfigureAuditFields(ModelBuilder modelBuilder)
+    {
+        // Ignore NguoiTao and NguoiCapNhatCuoi for AuditableEntity-based entities that don't have these columns in database
+        // Based on database.sql schema analysis
+
+        // Entities that extend AuditableEntity but database has ONLY NgayTao
+        modelBuilder.Entity<VaiTroNguoiDung>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<VaiTroNguoiDung>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<VaiTroNguoiDung>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<DiaChiNguoiDung>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<DiaChiNguoiDung>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<DiaChiNguoiDung>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<DanhMucSanPham>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<DanhMucSanPham>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<DanhMucSanPham>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<ThuongHieu>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<ThuongHieu>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<ThuongHieu>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<HinhAnhSanPham>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<HinhAnhSanPham>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<HinhAnhSanPham>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<NhaCungCap>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<NhaCungCap>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<NhaCungCap>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<BienDongKhoHang>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<BienDongKhoHang>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<BienDongKhoHang>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<DonHang>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<DonHang>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<DonHang>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<MaGiamGia>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<MaGiamGia>().Ignore(e => e.NguoiCapNhatCuoi);
+        // MaGiamGia has NguoiTao in database
+
+        modelBuilder.Entity<SuDungMaGiamGia>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<SuDungMaGiamGia>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<SuDungMaGiamGia>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<DanhGiaSanPham>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<DanhGiaSanPham>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<DanhGiaSanPham>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<DanhSachYeuThich>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<DanhSachYeuThich>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<DanhSachYeuThich>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        modelBuilder.Entity<GioHang>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<GioHang>().Ignore(e => e.NguoiCapNhatCuoi);
+        // GioHang has NgayTao and NgayCapNhatCuoi in database
+
+        modelBuilder.Entity<CaiDatHeThong>().Ignore(e => e.NgayTao);
+        modelBuilder.Entity<CaiDatHeThong>().Ignore(e => e.NguoiTao);
+        // CaiDatHeThong has NgayCapNhatCuoi and NguoiCapNhatCuoi in database
+
+        modelBuilder.Entity<BaiViet>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<BaiViet>().Ignore(e => e.NguoiCapNhatCuoi);
+        // BaiViet has NgayTao and NgayCapNhatCuoi in database
+
+        modelBuilder.Entity<BinhLuanBaiViet>().Ignore(e => e.NgayCapNhatCuoi);
+        modelBuilder.Entity<BinhLuanBaiViet>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<BinhLuanBaiViet>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        // SanPham has NgayTao and NgayCapNhatCuoi but NO NguoiCapNhatCuoi
+        // NguoiTao is configured in SanPhamConfiguration using NguoiTaoMaSanPham foreign key
+        modelBuilder.Entity<SanPham>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        // NguoiDung has NgayTao and NgayCapNhatCuoi but NO NguoiTao/NguoiCapNhatCuoi
+        modelBuilder.Entity<NguoiDung>().Ignore(e => e.NguoiTao);
+        modelBuilder.Entity<NguoiDung>().Ignore(e => e.NguoiCapNhatCuoi);
+
+        // Note: ThuocTinhSanPham, TrangThaiDonHang, PhuongThucThanhToan, PhuongThucVanChuyen,
+        // ChiTietDonHang, NhatKyHeThong extend BaseEntity (not AuditableEntity), so they don't have audit fields
     }
 
     private static void ConfigureIndexes(ModelBuilder modelBuilder)

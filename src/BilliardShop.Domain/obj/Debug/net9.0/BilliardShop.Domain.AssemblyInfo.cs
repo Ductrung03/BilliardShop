@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BilliardShop.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a42a05f0c12efd5e7d3318f2cd351b250087978")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92a82caac4e1017e0ddd235dde5e18051f610b3a")]
 [assembly: System.Reflection.AssemblyProductAttribute("BilliardShop.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BilliardShop.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
