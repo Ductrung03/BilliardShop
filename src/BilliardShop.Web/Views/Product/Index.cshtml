@@ -1,182 +1,488 @@
 @model BilliardShop.Web.Models.ProductListViewModel
 @{
     ViewData["Title"] = Model.CurrentCategory != null ? Model.CurrentCategory.TenDanhMuc : "Sản phẩm";
+    ViewData["BodyId"] = "collection";
+    ViewData["Template"] = "collection";
 }
 
-<div class="container">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
-            @if (Model.CurrentCategory != null)
-            {
-                <li class="breadcrumb-item active" aria-current="page">@Model.CurrentCategory.TenDanhMuc</li>
-            }
-            else
-            {
-                <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
-            }
-        </ol>
-    </nav>
+@section Styles {
+    <link rel="stylesheet" href="~/template-collection.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/dt-facets.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/dt-price.css" asp-append-version="true" />
 
-    <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Danh mục</h5>
-                </div>
-                <div class="list-group list-group-flush">
+    <style>
+        .collection-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 0;
+            color: white;
+            margin-bottom: 40px;
+        }
+        .collection-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .collection-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .breadcrumb-custom {
+            background: transparent;
+            padding: 20px 0;
+        }
+        .breadcrumb-custom a {
+            color: #7f8c8d;
+            text-decoration: none;
+        }
+        .breadcrumb-custom a:hover {
+            color: #e74c3c;
+        }
+        .collection-wrapper {
+            display: flex;
+            gap: 30px;
+        }
+        .collection-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+        .sidebar-block {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .sidebar-block h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .category-list li {
+            margin-bottom: 10px;
+        }
+        .category-list a {
+            display: block;
+            padding: 10px 15px;
+            border-radius: 6px;
+            color: #555;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .category-list a:hover,
+        .category-list a.active {
+            background: #e74c3c;
+            color: white;
+        }
+        .collection-main {
+            flex: 1;
+        }
+        .collection-toolbar {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .filter-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .filter-row input,
+        .filter-row select {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            flex: 1;
+        }
+        .btn-search {
+            padding: 12px 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-search:hover {
+            background: #c0392b;
+        }
+        .btn-reset {
+            padding: 12px 30px;
+            background: #95a5a6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-reset:hover {
+            background: #7f8c8d;
+        }
+        .product-count {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .pagination-wrapper {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .pagination-custom {
+            display: inline-flex;
+            gap: 10px;
+            list-style: none;
+            padding: 0;
+        }
+        .pagination-custom li a {
+            display: block;
+            padding: 10px 18px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            color: #555;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .pagination-custom li.active a,
+        .pagination-custom li a:hover {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+
+        @@media (max-width: 992px) {
+            .collection-wrapper {
+                flex-direction: column;
+            }
+            .collection-sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+}
+
+@* Breadcrumb *@
+<div class="page-width breadcrumb-custom">
+    <nav aria-label="breadcrumb">
+        <a href="@Url.Action("Index", "Home")">Trang chủ</a>
+        <span> / </span>
+        @if (Model.CurrentCategory != null)
+        {
+            <span>@Model.CurrentCategory.TenDanhMuc</span>
+        }
+        else
+        {
+            <span>Sản phẩm</span>
+        }
+    </nav>
+</div>
+
+@* Collection Hero *@
+@if (Model.CurrentCategory != null)
+{
+    <div class="collection-hero">
+        <div class="page-width">
+            <h1 class="wow fadeInUp">@Model.CurrentCategory.TenDanhMuc</h1>
+            @if (!string.IsNullOrEmpty(Model.CurrentCategory.MoTa))
+            {
+                <p class="wow fadeInUp" data-wow-delay="0.2s">@Model.CurrentCategory.MoTa</p>
+            }
+        </div>
+    </div>
+}
+
+<div class="page-width">
+    <div class="collection-wrapper">
+        @* Sidebar *@
+        <aside class="collection-sidebar wow fadeInLeft">
+            <div class="sidebar-block">
+                <h3>Danh mục</h3>
+                <ul class="category-list">
+                    <li>
+                        <a href="@Url.Action("Index", "Product")" class="@(Model.CurrentCategory == null ? "active" : "")">
+                            Tất cả sản phẩm
+                        </a>
+                    </li>
                     @foreach (var category in Model.AllCategories)
                     {
-                        <a asp-controller="Product" asp-action="Index" asp-route-categorySlug="@category.DuongDanDanhMuc"
-                           class="list-group-item list-group-item-action @(Model.CurrentCategory?.Id == category.Id ? "active" : "")">
-                            @category.TenDanhMuc
-                        </a>
-                    }
-                </div>
-            </div>
-        </div>
-
-        <!-- Product List -->
-        <div class="col-md-9">
-            @if (Model.CurrentCategory != null)
-            {
-                <div class="category-header mb-4">
-                    <h1>@Model.CurrentCategory.TenDanhMuc</h1>
-                    @if (!string.IsNullOrEmpty(Model.CurrentCategory.MoTa))
-                    {
-                        <p class="text-muted">@Model.CurrentCategory.MoTa</p>
-                    }
-                </div>
-            }
-
-            <!-- Search and Filter Form -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <form asp-controller="Product" asp-action="Search" method="get">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="searchTerm" class="form-label">Tìm kiếm</label>
-                                <input type="text" class="form-control" id="searchTerm" name="q"
-                                       value="@Model.SearchTerm" placeholder="Nhập tên sản phẩm...">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="minPrice" class="form-label">Giá từ</label>
-                                <input type="number" class="form-control" id="minPrice" name="minPrice"
-                                       placeholder="0" min="0" step="10000">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="maxPrice" class="form-label">Giá đến</label>
-                                <input type="number" class="form-control" id="maxPrice" name="maxPrice"
-                                       placeholder="10000000" min="0" step="10000">
-                            </div>
-                        </div>
-                        <input type="hidden" name="categorySlug" value="@Model.CurrentCategory?.DuongDanDanhMuc" />
-                        <div class="mt-3">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-search"></i> Tìm kiếm
-                            </button>
-                            <a asp-controller="Product" asp-action="Index"
-                               asp-route-categorySlug="@Model.CurrentCategory?.DuongDanDanhMuc"
-                               class="btn btn-secondary">
-                                <i class="bi bi-arrow-clockwise"></i> Đặt lại
+                        <li>
+                            <a href="@Url.Action("Index", "Product", new { categorySlug = category.DuongDanDanhMuc })"
+                               class="@(Model.CurrentCategory?.Id == category.Id ? "active" : "")">
+                                @category.TenDanhMuc
                             </a>
-                        </div>
-                    </form>
-                </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="sidebar-block">
+                <h3>Lọc theo giá</h3>
+                <form asp-controller="Product" asp-action="Index" method="get">
+                    <input type="hidden" name="categorySlug" value="@Model.CurrentCategory?.DuongDanDanhMuc" />
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-size: 14px; color: #7f8c8d; margin-bottom: 5px; display: block;">Từ</label>
+                        <input type="number" name="minPrice" placeholder="0 ₫" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;" min="0" step="10000">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-size: 14px; color: #7f8c8d; margin-bottom: 5px; display: block;">Đến</label>
+                        <input type="number" name="maxPrice" placeholder="10,000,000 ₫" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;" min="0" step="10000">
+                    </div>
+                    <button type="submit" class="btn-search" style="width: 100%;">
+                        <i class="fa fa-filter"></i> Lọc giá
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        @* Main Content *@
+        <div class="collection-main wow fadeInRight">
+            @* Search Toolbar *@
+            <div class="collection-toolbar">
+                <form asp-controller="Product" asp-action="Search" method="get">
+                    <div class="filter-row">
+                        <input type="text" name="q" value="@Model.SearchTerm" placeholder="Tìm kiếm sản phẩm..." />
+                        <input type="hidden" name="categorySlug" value="@Model.CurrentCategory?.DuongDanDanhMuc" />
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" class="btn-search">
+                            <i class="fa fa-search"></i> Tìm kiếm
+                        </button>
+                        <a href="@Url.Action("Index", "Product", new { categorySlug = Model.CurrentCategory?.DuongDanDanhMuc })" class="btn-reset">
+                            <i class="fa fa-refresh"></i> Đặt lại
+                        </a>
+                    </div>
+                </form>
             </div>
 
             @if (!string.IsNullOrEmpty(Model.SearchTerm))
             {
-                <div class="alert alert-info mb-4">
-                    Kết quả tìm kiếm cho: <strong>@Model.SearchTerm</strong>
+                <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 25px; color: #2e7d32;">
+                    <i class="fa fa-info-circle"></i> Kết quả tìm kiếm cho: <strong>@Model.SearchTerm</strong>
                 </div>
             }
 
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <p class="text-muted mb-0">Hiển thị @Model.Products.Count() trên @Model.TotalProducts sản phẩm</p>
+            <div class="product-count">
+                Hiển thị <strong>@Model.Products.Count()</strong> trên <strong>@Model.TotalProducts</strong> sản phẩm
             </div>
 
-            <div class="row">
+            @* Product Grid *@
+            <div class="product-grid">
                 @foreach (var product in Model.Products)
                 {
-                    <div class="col-md-4 col-sm-6 mb-4">
-                        <div class="card product-card h-100">
-                            <a asp-controller="Product" asp-action="Details" asp-route-slug="@product.DuongDanSanPham">
+                    <div class="product-card-wrapper">
+                        @if (product.GiaKhuyenMai.HasValue)
+                        {
+                            var discount = (int)((product.GiaGoc - product.GiaKhuyenMai.Value) / product.GiaGoc * 100);
+                            <span class="product-badge">-@discount%</span>
+                        }
+
+                        <a href="@Url.Action("Details", "Product", new { slug = product.DuongDanSanPham })">
+                            <div class="product-card-image">
                                 @if (product.HinhAnhs.Any())
                                 {
-                                    <img src="@product.HinhAnhs.First().DuongDanHinhAnh" class="card-img-top" alt="@product.TenSanPham" style="height: 250px; object-fit: cover;">
+                                    <img src="@product.HinhAnhs.First().DuongDanHinhAnh" alt="@product.TenSanPham">
                                 }
                                 else
                                 {
-                                    <img src="/images/no-image.png" class="card-img-top" alt="No image" style="height: 250px; object-fit: cover;">
-                                }
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a asp-controller="Product" asp-action="Details" asp-route-slug="@product.DuongDanSanPham" class="text-decoration-none text-dark">
-                                        @product.TenSanPham
-                                    </a>
-                                </h5>
-                                @if (!string.IsNullOrEmpty(product.MoTaNgan))
-                                {
-                                    <p class="card-text text-muted small">@product.MoTaNgan</p>
-                                }
-                                <div class="price-section mt-3">
-                                    @if (product.GiaKhuyenMai.HasValue)
-                                    {
-                                        <span class="text-danger fw-bold">@product.GiaKhuyenMai.Value.ToString("N0") đ</span>
-                                        <span class="text-muted text-decoration-line-through ms-2">@product.GiaGoc.ToString("N0") đ</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="fw-bold">@product.GiaGoc.ToString("N0") đ</span>
-                                    }
-                                </div>
-                                @if (product.SoLuongTonKho <= 0)
-                                {
-                                    <span class="badge bg-secondary mt-2">Hết hàng</span>
+                                    <img src="~/product-placeholder.svg" alt="@product.TenSanPham">
                                 }
                             </div>
+                        </a>
+
+                        <div class="product-card-content">
+                            <a href="@Url.Action("Details", "Product", new { slug = product.DuongDanSanPham })" class="product-title">
+                                @product.TenSanPham
+                            </a>
+
+                            @if (!string.IsNullOrEmpty(product.MoTaNgan))
+                            {
+                                <p class="product-description">
+                                    @(product.MoTaNgan.Length > 80 ? product.MoTaNgan.Substring(0, 80) + "..." : product.MoTaNgan)
+                                </p>
+                            }
+
+                            <div class="product-price">
+                                @if (product.GiaKhuyenMai.HasValue)
+                                {
+                                    <span class="price-sale">@product.GiaKhuyenMai.Value.ToString("N0") ₫</span>
+                                    <span class="price-regular">@product.GiaGoc.ToString("N0") ₫</span>
+                                }
+                                else
+                                {
+                                    <span class="price-sale">@product.GiaGoc.ToString("N0") ₫</span>
+                                }
+                            </div>
+
+                            @if (product.SoLuongTonKho > 0)
+                            {
+                                <button class="btn-add-to-cart" onclick="addToCart(@product.SanPhamId)">
+                                    <i class="fa fa-shopping-cart"></i> Thêm vào giỏ
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn-add-to-cart out-of-stock" disabled>
+                                    Hết hàng
+                                </button>
+                            }
                         </div>
                     </div>
                 }
             </div>
 
-            <!-- Pagination -->
+            @* Pagination *@
             @if (Model.TotalPages > 1)
             {
-                <nav aria-label="Product pagination">
-                    <ul class="pagination justify-content-center">
+                <div class="pagination-wrapper">
+                    <ul class="pagination-custom">
                         @if (Model.CurrentPage > 1)
                         {
-                            <li class="page-item">
-                                <a class="page-link" asp-controller="Product" asp-action="Index"
-                                   asp-route-categorySlug="@Model.CurrentCategory?.DuongDanDanhMuc"
-                                   asp-route-page="@(Model.CurrentPage - 1)">Trước</a>
+                            <li>
+                                <a href="@Url.Action("Index", "Product", new { categorySlug = Model.CurrentCategory?.DuongDanDanhMuc, page = Model.CurrentPage - 1 })">
+                                    <i class="fa fa-angle-left"></i> Trước
+                                </a>
                             </li>
                         }
 
                         @for (int i = 1; i <= Model.TotalPages; i++)
                         {
-                            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                                <a class="page-link" asp-controller="Product" asp-action="Index"
-                                   asp-route-categorySlug="@Model.CurrentCategory?.DuongDanDanhMuc"
-                                   asp-route-page="@i">@i</a>
+                            <li class="@(i == Model.CurrentPage ? "active" : "")">
+                                <a href="@Url.Action("Index", "Product", new { categorySlug = Model.CurrentCategory?.DuongDanDanhMuc, page = i })">
+                                    @i
+                                </a>
                             </li>
                         }
 
                         @if (Model.CurrentPage < Model.TotalPages)
                         {
-                            <li class="page-item">
-                                <a class="page-link" asp-controller="Product" asp-action="Index"
-                                   asp-route-categorySlug="@Model.CurrentCategory?.DuongDanDanhMuc"
-                                   asp-route-page="@(Model.CurrentPage + 1)">Sau</a>
+                            <li>
+                                <a href="@Url.Action("Index", "Product", new { categorySlug = Model.CurrentCategory?.DuongDanDanhMuc, page = Model.CurrentPage + 1 })">
+                                    Sau <i class="fa fa-angle-right"></i>
+                                </a>
                             </li>
                         }
                     </ul>
-                </nav>
+                </div>
             }
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <style>
+        .product-card-wrapper {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        .product-card-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .product-card-image {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        .product-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .product-card-wrapper:hover .product-card-image img {
+            transform: scale(1.05);
+        }
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 1;
+        }
+        .product-card-content {
+            padding: 20px;
+        }
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: block;
+        }
+        .product-title:hover {
+            color: #e74c3c;
+        }
+        .product-description {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .price-sale {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        .price-regular {
+            font-size: 16px;
+            color: #95a5a6;
+            text-decoration: line-through;
+        }
+        .btn-add-to-cart {
+            width: 100%;
+            padding: 12px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-add-to-cart:hover {
+            background: #34495e;
+        }
+        .out-of-stock {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <script>
+        function addToCart(productId) {
+            console.log('Adding product to cart:', productId);
+            alert('Sản phẩm đã được thêm vào giỏ hàng!');
+        }
+    </script>
+}

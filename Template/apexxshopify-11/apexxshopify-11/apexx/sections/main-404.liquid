@@ -1,0 +1,37 @@
+<style type="text/css">
+  .template-404 .title{margin: 0;}
+  .template-404 .button{margin:35px 0 0;}
+  .template-404 .subtext-404{font-size: 14vw;line-height: 1; margin: 0;font-weight: 700;}
+  .template-404.page-margin {margin-top: 6rem;margin-bottom: 0;padding-bottom: 9rem; position: relative;}
+  .shopify-section:has(.template-404){border-bottom: 0.1rem solid rgb(var(--color-border), 0.15);}
+ @media screen and (max-width: 1540px) { .template-404 .subtext-404{font-size: 20rem;line-height: 1;}}
+ @media screen and (max-width: 990px) { 
+   .template-404 .subtext-404{font-size: 20rem;line-height: 1;}
+   /* .template-404 .title{font-size: calc(var(--font-h1-size) * 0.8);} */
+    }
+ @media screen and (max-width: 749px){
+   .template-404 {margin-top: 5.2rem;}
+   .template-404 .subtext-404{font-size: 14rem;line-height: 1;}
+   /* .template-404 .title{font-size: calc(var(--font-h1-size) * 0.6);} */
+ }     
+  @media screen and (max-width: 749px){
+    .template-404 {margin-top: 3rem;} 
+    /* .template-404 .title {  font-size: calc(var(--font-h1-size) * 0.4);} */
+   }
+</style>
+
+<div class="template-404 page-width page-margin center">
+  <h2 class="subtext-404">
+    {{ 'templates.404.subtext' | t }}
+  </h2>
+  <h6 class="sub-heading" style="margin-bottom: 1rem;"> {{ 'templates.404.caption' | t }}</h6>
+  <h1 class="title h2">
+    {{ 'templates.404.title' | t }}
+  </h1>
+    <p class="description">
+    {{ 'templates.404.description' | t }}
+  </p>
+  <a href="{{ routes.root_url }}" class="button">
+     {{ 'templates.404.button_text' | t }}
+  </a>
+</div>

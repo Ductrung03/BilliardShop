@@ -1,0 +1,638 @@
+{{ 'faq-tab-content.css' | asset_url | stylesheet_tag }}
+
+<div class="faq-tab-content color-{{ section.settings.color_scheme }} gradient ">
+  <div
+    data-section-id="{{ section.id }}"
+    data-section-type="faq-block-section"
+    class="dt-sc-section-wrapper {% if section.settings.page_full_width %} page-full-width {% else %} page-width {% endif %} {% if section.settings.page_full_width_spacing %} page-full-width_spacing {% endif %} section-{{ section.id }}-padding isolate"
+  >
+    <div class="page-width">
+      <div class="faq-tab-content-wrappers ">
+        <div class="row {{ section.settings.custom_class_name }}">
+          <div class="dt-sc-faqs">
+            <div class="heading-wrappers center title-wrapper--no-top-margin title-wrapper-with-link content-align--center">
+              {%- if section.settings.sub_heading != blank -%}  
+               <h6 class="sub-heading">{{ section.settings.sub_heading | escape }}</h6>
+             {%- endif -%} 
+              {%- if section.settings.heading != blank -%}
+                <h2 class="title title-wrapper--no-top-margin {{ section.settings.heading_size }}">
+                  {{ section.settings.heading }}
+                </h2>
+              {%- else -%}
+                <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
+              {%- endif -%}
+              {%- if section.settings.description != blank -%}
+                <p class="description">{{ section.settings.description }}</p>
+              {%- endif -%}
+            </div>
+            <article class="tab-content shopify-section fancy-horizontal-tabs  wow {% if section.settings.animation_effect_section != 'none' %} {{ section.settings.animation_effect_section }} {% endif %}">
+              <nav class="tabs">
+                <div class="nav nav-pills {{ section.settings.top_heading_position}}">
+                  {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when 'heading' %}
+                        {% if block.settings.heading != blank %}
+                          <div class="nav-item">
+                            <a
+                              class="{% if forloop.first %}active{% endif %} nav-link   {{section.settings.tab_nav_box_shadow_levels}}"
+                              href="#tab{{forloop.index}}"
+                            >
+                              <span class="{% if block.settings.icon_image_check %}image-{{block.id}}-icon {% else %} font-{{block.id}}-icons {% endif %}title_icon">
+                                {% if block.settings.icon_image_check -%}
+                                  <i
+                                    class="{{block.settings.accordian_title_icon}}"
+                                    style="font-size:{{block.settings.accordian_title_icon_font_size }}px;"
+                                  ></i>
+                                {% endif %}
+                                {{ block.settings.heading }}
+                              </span>
+                            </a>
+                          </div>
+                        {% endif %}
+                    {% endcase %}
+                  {% endfor %}
+                </div>
+              </nav>
+              <div
+                class="{% if section.settings.tab_content_shadow %}shadow-sm{% endif %}"
+                id="myTabContent"
+              >
+                {% for block in section.blocks %}
+                  {% case block.type %}
+                    {% when 'heading' %}
+                      {% if block.settings.heading != blank %}
+                        <div
+                          class="item {{block.type}}  tab-pane {% if forloop.first %}active{% endif %}"
+                          id="tab{{forloop.index}}"
+                        >
+                      {% endif %}
+                    {% when 'text' %}
+                      <div class="card faq">
+                        <div class="card-header question" id="heading{{forloop.index}}">
+                          <button class="btn btn-link btn-block text-left dt-sc-toggle td-{{forloop.index}}">
+                            <span class="title-faq h3">
+                              {{ block.settings.title }}
+                              <div class=" title-faq-wrapper">
+                                <div class="icon-one">
+                                  {% render 'collapsible-icon-caret' %}
+                                </div>
+                              </div>
+                            </span>
+                          </button>
+                        </div>
+                        <div
+                          id="collapse{{forloop.index}}-tab1"
+                          class="answer dt-sc-toggle-content tds-{{forloops.index}}"
+                        >
+                          <div class="card-body">
+                            {{ block.settings.description }}
+                          </div>
+                        </div>
+                      </div>
+                    {% when 'divider' %}
+                      </div>
+                  {% endcase %}
+                {% endfor %}
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+      {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+        {% if section.settings.form_image != blank %}
+          <img src="{{ section.settings.form_image | image_url: width: 800 }}" width="800" height="800" loading="lazy">
+        {%- else -%}
+          {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder_svg' }}
+        {% endif %}
+        {% if section.settings.form_title != blank %}
+          <h3 class="contact__fields-heading">{{ section.settings.form_title }}</h3>
+        {% endif %}
+        {%- if form.posted_successfully? -%}
+          <div class="form-status form-status-list form__message" tabindex="-1" autofocus>
+            {% render 'icon-success' %}
+            {{ 'templates.contact.form.post_success' | t }}
+          </div>
+          {% comment %}  {%- elsif form.errors -%} {% endcomment %}
+          <!--
+            <div class="form__message">
+              <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</h2>
+            </div>
+            <ul class="form-status-list caption-large" role="list">
+              <li>
+                <a href="#ContactForm-email" class="link">
+                  {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+                </a>
+              </li>
+            </ul>
+          -->
+        {%- endif -%}
+        <div class="contact__fields">
+          <div class="field">
+            <input
+              class="field__input"
+              autocomplete="name"
+              type="text"
+              id="ContactForm-name"
+              name="contact[{{ 'templates.contact.form.name' | t }}]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="{{ 'templates.contact.form.name' | t }}"
+              required
+            >
+            <label class="field__label visually-hidden" for="ContactForm-name">
+              {{- 'templates.contact.form.name' | t -}}
+            </label>
+          </div>
+          <div class="field field--with-error">
+            <input
+              autocomplete="email"
+              type="email"
+              id="ContactForm-email"
+              class="field__input"
+              name="contact[email]"
+              spellcheck="false"
+              autocapitalize="off"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              aria-required="true"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="ContactForm-email-error"
+              {% endif %}
+              placeholder="{{ 'templates.contact.form.email' | t }}"
+              required
+            >
+            <label class="field__label visually-hidden" for="ContactForm-email">
+              {{- 'templates.contact.form.email' | t }}
+              <span aria-hidden="true">*</span></label
+            >
+            {%- if form.errors contains 'email' -%}
+              <small class="contact__field-error visually-hidden" id="ContactForm-email-error">
+                <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+                <span class="form__message">
+                  {%- render 'icon-error' -%}
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </span>
+              </small>
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="field">
+          <input
+            type="tel"
+            id="ContactForm-phone"
+            class="field__input"
+            autocomplete="tel"
+            name="contact[{{ 'templates.contact.form.phone' | t }}]"
+            pattern="[0-9\-]*"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.phone' | t }}"
+            required
+          >
+          <label class="field__label visually-hidden" for="ContactForm-phone">
+            {{- 'templates.contact.form.phone' | t -}}
+          </label>
+        </div>
+        <div class="field">
+          <textarea
+            rows="10"
+            id="ContactForm-body"
+            class="text-area field__input"
+            name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            placeholder="{{ 'templates.contact.form.comment' | t }}"
+            required
+          >
+          {{- form.body -}}
+        </textarea>
+          <label class="form__label field__label visually-hidden" for="ContactForm-body">
+            {{- 'templates.contact.form.comment' | t -}}
+          </label>
+        </div>
+        <div class="contact__button">
+          <button type="submit" class="button">{{ 'templates.contact.form.send' | t }}</button>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  tabControl();
+  var resizeTimer;
+  $(window).on('resize', function(e) {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      tabControl();
+    }, 250);
+  });
+
+  function tabControl() {
+    var tabs = $('.tab-content').find('.tabs');
+    if(tabs.is(':visible')) {
+      tabs.find('a').on('click', function(event) {
+        event.preventDefault();
+        var target = $(this).attr('href'),
+            tabs = $(this).parents('.tabs'),
+            buttons = tabs.find('a'),
+            item = tabs.parents('.tab-content').find('.item');
+        buttons.removeClass('active');
+        item.removeClass('active');
+        $(this).addClass('active');
+        $(target).addClass('active');
+      });
+    } else {
+      $('.item').on('click', function() {
+        var container = $(this).parents('.tab-content'),
+            currId = $(this).attr('id'),
+            items = container.find('.item');
+        container.find('.tabs a').removeClass('active');
+        items.removeClass('active');
+        $(this).addClass('active');
+        container.find('.tabs a[href$="#'+ currId +'"]').addClass('active');
+      });
+    }
+  }
+      $('.card-header.question').each(function() {
+        $(this).on('click', function() {
+            $(this).toggleClass('open');
+            $(this).next()
+                .slideToggle(500)
+                .siblings('.answer')
+                .slideUp();
+        });
+
+    });
+</script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<style>
+    .shopify-section.fancy-horizontal-tabs #myTabContent .card{
+      {% if section.settings.box_shadow_check %}
+      {% if section.settings.box_shadow_levels == 'small-shadow' %}
+      -webkit-box-shadow:0 0 15px -5px {{ section.settings.box_shadow  | color_modify: 'alpha', 0.5 }};
+      -moz-box-shadow:0 0 15px -5px {{ section.settings.box_shadow  | color_modify: 'alpha', 0.5 }};
+      box-shadow:0 0 15px -5px {{ section.settings.box_shadow  | color_modify: 'alpha', 0.5 }};
+
+      {% elsif section.settings.box_shadow_levels == 'regular-shadow' %}
+      -webkit-box-shadow:0 0 15px -5px {{ section.settings.box_shadow  | color_modify: 'alpha', 0.7 }};
+      -moz-box-shadow:0 0 15px -5px {{ section.settings.box_shadow  | color_modify: 'alpha', 0.7 }};
+      box-shadow:0 0 15px -5px {{ section.settings.box_shadow  | color_modify: 'alpha', 0.7 }};
+      {% else %}
+      -webkit-box-shadow:0 0 15px -5px {{ section.settings.box_shadow  | color_modify: 'alpha', 0.9 }};
+      -moz-box-shadow:0 0 15px -5px {{ section.settings.box_shadow  | color_modify: 'alpha', 0.9 }};
+      box-shadow:0 0 15px -5px {{ section.settings.box_shadow  | color_modify: 'alpha', 0.9 }};
+      {% endif %}
+      {% endif%}
+    }
+
+    .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link{
+      {% if section.settings.tab_nav_shadow_check %}
+      {% if section.settings.tab_nav_box_shadow_levels == 'small-shadow' %}
+      -webkit-box-shadow:0 0 15px -5px {{ section.settings.tab_nav_box_shadow  | color_modify: 'alpha', 0.5 }};
+      -moz-box-shadow:0 0 15px -5px {{ section.settings.tab_nav_box_shadow  | color_modify: 'alpha', 0.5 }};
+      box-shadow:0 0 15px -5px {{ section.settings.tab_nav_box_shadow  | color_modify: 'alpha', 0.5 }};
+
+      {% elsif section.settings.tab_nav_box_shadow_levels == 'regular-shadow' %}
+      -webkit-box-shadow:0 0 15px -5px {{ section.settings.tab_nav_box_shadow  | color_modify: 'alpha', 0.7 }};
+      -moz-box-shadow:0 0 15px -5px {{ section.settings.tab_nav_box_shadow  | color_modify: 'alpha', 0.7 }};
+      box-shadow:0 0 15px -5px {{ section.settings.tab_nav_box_shadow  | color_modify: 'alpha', 0.7 }};
+
+      {% else %}
+      -webkit-box-shadow:0 0 15px -5px {{ section.settings.tab_nav_box_shadow  | color_modify: 'alpha', 0.9 }};
+      -moz-box-shadow:0 0 15px -5px {{ section.settings.tab_nav_box_shadow  | color_modify: 'alpha', 0.9 }};
+      box-shadow:0 0 15px -5px {{ section.settings.tab_nav_box_shadow  | color_modify: 'alpha', 0.9 }};
+      {% endif %}
+
+      {% endif%}
+    }
+
+
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button span .icon-one span {
+      transition: all 0.25s ease-in-out;
+      -webkit-transition: all 0.25s ease-in-out;
+      border:none; ;
+      text-align: center; display: none;
+    }
+
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header:not(.open) button span .icon-one span.close_icon,
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header.open button span .icon-one span.open_icon { display:none; }
+
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button[aria-expanded="true"] span.title-faq{border-bottom-right-radius: 0;border-bottom-left-radius: 0;}
+
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button[aria-expanded="true"] span.close_icon{opacity:0;visibility: hidden;position: absolute;top: 0;transition: all 0.25s ease-in-out; -webkit-transition: all 0.25s ease-in-out; }
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button[aria-expanded] span.open_icon{display:none;transition: all 0.25s ease-in-out; -webkit-transition: all 0.25s ease-in-out; border:none;}
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button[aria-expanded] span.close_icon{display:block;transition: all 0.25s ease-in-out; -webkit-transition: all 0.25s ease-in-out;border:none; }
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button[aria-expanded="true"] span.open_icon{display:block;transition: all 0.25s ease-in-out; -webkit-transition: all 0.25s ease-in-out; }
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button span.title-faq .icon-one{position:relative;    display: inherit;}
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button span.title-faq .title-faq-wrapper { display: inline-flex; align-items: center; justify-content: center;}
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button span.title-faq .icon-one svg { transform: rotate(0); width: 3rem; height: 3rem; transition: all var(--duration-default) linear; color:inherit; }
+    .shopify-section.fancy-horizontal-tabs .btn{border:0;}
+
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button span.title-faq{ display:flex; align-items: center;column-gap: 20px; justify-content: space-between; padding:0;}
+
+    /*   Accordion */
+
+  @media screen and (min-width: 1200px) {
+    .faq-template-3 .faq-tab-content .dt-sc-section-wrapper .page-width .faq-tab-content-wrappers {  width: calc(100% - var(--sidebar-width) - 60px); }
+    }
+
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button:hover span,
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header button[aria-expanded="true"] > span,
+    .shopify-section.fancy-horizontal-tabs .tab-content .card-header .btn:not([disabled]):hover > span {
+      color: rgb(var(--color-button), 1);
+    }
+  .shopify-section.fancy-horizontal-tabs .tab-content .card-header.open span.title-faq{
+    color: rgb(var(--color-button), 1);
+  }
+  .shopify-section.fancy-horizontal-tabs .tab-content .card-header.open  button span.title-faq .icon-one svg{
+    color: rgba(var(--color-button));
+    transform: rotate(-90deg);
+  }
+
+
+    /* Tab Nav */
+    .shopify-section.fancy-horizontal-tabs .nav-pills {
+      font-family: var(--font-stack-header); overflow: hidden;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      padding-left: 0;margin:0;
+      list-style: none;
+        }
+
+    .shopify-section.fancy-horizontal-tabs .nav-pills { gap: 16px; }
+
+    .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link {
+      display: inline-flex;
+      line-height: normal;
+      transition: all .3s linear;
+      margin-bottom: 0;
+      border-top: .1rem solid rgb(var(--color-border), 1);
+      border-bottom: .1rem solid rgb(var(--color-border), 1);
+      color: rgb(var(--color-secondary-button-text));
+      background-color: rgba(var(--color-secondary-button));
+      backdrop-filter: blur(6px);
+      padding: 0 3rem;
+      min-height: calc(6rem + var(--buttons-border-width)* 2);
+      text-transform: uppercase;
+      font-weight: var(--font-heading-weight);
+      position: relative;
+      text-align: center;
+      justify-content: center;
+    }
+    .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link:hover,
+    .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link.active{
+      color: rgba(var(--color-button-text));
+      background-color: rgb(var(--color-button));
+      border-top: .1rem solid rgb(var(--button-color-text), 1);
+      border-bottom: .1rem solid rgb(var(--button-color-text), 1);
+  }
+    .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link.active:before,.shopify-section.fancy-horizontal-tabs .nav-pills .nav-link.active:after{
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+     background: rgb(var(--color-button-text));
+    }
+
+    .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link span.title_icon{
+     display: inline-flex; transition: var(--duration-default); font-family: var(--font-heading-family);     align-items: center;}
+    .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link span.title_icon i {margin-right:10px;}
+
+
+  @media(max-width:1200px){
+   .shopify-section.fancy-horizontal-tabs .tab-content .card-header button span.title-faq{font-size:2rem; }
+  }
+
+
+     @media(max-width:749px){
+    .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link span.title_icon,
+
+     }
+      @media(max-width:575px){
+  .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link span.title_icon i{display:none;}
+  .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link span.title_icon {padding:10px ;}
+  }
+
+    {% for block in section.blocks %}
+    {% if block.settings.icon_image_check %}
+    {% if block.settings.icon_image != blank  %}
+    .shopify-section.fancy-horizontal-tabs .nav-pills .nav-link span.image-{{block.id}}-icon:before {
+      -webkit-mask-image:url({{ block.settings.icon_image | image_url: '25x25' }});
+      mask-image:url({{ block.settings.icon_image | image_url: '25x25' }});
+      background-color:{{block.settings.accordian_title_icon_color}};
+      content:'';
+      width:25px; height:25px; background-repeat: no-repeat;
+      -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+
+    }
+
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.faq-tab.name",
+  "class": "fancy-horizontal-tabs faq-template-3",
+  "max_blocks": 50,
+  "settings": [
+  {
+    "type":"checkbox",
+    "id":"page_full_width",
+     "default": false,
+    "label": "t:sections.all.page_full_width.label"
+  },
+  {
+    "type":"checkbox",
+    "id":"page_full_width_spacing",
+     "default": false,
+    "label": "t:sections.all.page_full_width_spacing.label"
+  },
+  {
+    "type": "text",
+    "id": "heading",
+    "default": "Unlock the Answers",
+    "label": "Heading"
+  },
+  {
+    "type": "select",
+    "id": "heading_size",
+    "options": [
+      {
+        "value": "h3",
+        "label": "t:sections.all.heading_size.options__1.label"
+      },
+      {
+        "value": "h2",
+        "label": "t:sections.all.heading_size.options__2.label"
+      },
+      {
+        "value": "h1",
+        "label": "t:sections.all.heading_size.options__3.label"
+      }
+    ],
+    "default": "h2",
+    "label": "t:sections.all.heading_size.label"
+  },
+  {
+    "type": "text",
+    "id": "sub_heading",
+    "label": "t:sections.all.sub_heading.label"
+  },
+  {
+    "type": "text",
+    "id": "description",
+    "label": "t:sections.all.description.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+  {
+    "type": "select",
+    "id": "top_heading_position",
+      "label": "t:sections.faq-tab.top_heading_position.label",
+    "options": [
+      {
+      "value": "text-center",
+        "label": "t:sections.faq-tab.top_heading_position.options__1.label"
+      },
+      {
+      "value": "text-left",
+      "label": "t:sections.faq-tab.top_heading_position.options__2.label"
+      },
+      {
+      "value": "text-right",
+      "label": "t:sections.faq-tab.top_heading_position.options__3.label"
+      }
+    ]
+  },
+  {
+    "type": "image_picker",
+    "id": "form_image",
+    "label": "t:sections.faq-tab.form_image.label",
+    "info": "Size: 800x560"
+  },
+  {
+    "type": "text",
+    "id": "form_title",
+    "default": "Form Title",
+    "label": "t:sections.faq-tab.form_title.label"
+  },
+  {
+    "type": "header",
+    "content": "t:sections.all.padding.section_padding_heading"
+  },
+  {
+    "type": "range",
+    "id": "padding_top",
+    "min": 0,
+    "max": 100,
+    "step": 4,
+    "unit": "px",
+    "label": "t:sections.all.padding.padding_top",
+    "default": 36
+  },
+  {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+],
+  "blocks" : [
+  {
+  "type": "heading",
+  "name": "t:sections.faq-tab.blocks.text.name",
+  "settings": [
+    {
+    "type": "text",
+    "id": "heading",
+    "label": "t:sections.faq-tab.blocks.settings.heading.label",
+    "default": "Enquiry tab"
+    },
+    {
+    "type": "checkbox",
+    "id": "icon_image_check",
+    "label": "t:sections.faq-tab.blocks.settings.icon_image_check.label",
+    "default": false
+    },
+    {
+    "type": "text",
+    "id": "accordian_title_icon",
+    "label": "t:sections.faq-tab.blocks.settings.accordian_title_icon.label",
+    "default": "fa fa-chevron-down",
+    "info": "Ref [Here](https://fontawesome.com/icons?d=gallery) to add new icon class"
+    }
+  ]
+},
+  {
+  "type": "text",
+  "name": "t:sections.faq-tab.blocks.FAQ.name",
+  "settings": [
+    {
+    "type": "text",
+    "id": "title",
+    "default": "Add your question here",
+    "label": "t:sections.faq-tab.blocks.settings.title.label"
+  },
+    {
+    "type": "textarea",
+    "id": "description",
+    "default": "Answer goes here...",
+    "label": "t:sections.faq-tab.blocks.settings.description.label"
+  }
+  ]
+},
+  {
+  "type": "divider",
+  "name": "divider"
+  }
+],
+  "presets": [
+  {
+  "name": "Faq Tab",
+  "blocks": [
+      {
+        "type": "heading"
+      },
+      {
+        "type": "text"
+      },
+      {
+        "type": "text"
+      },
+      {
+        "type": "text"
+      },
+      {
+        "type": "text"
+      }
+    ]
+  }
+]
+}
+{% endschema %}

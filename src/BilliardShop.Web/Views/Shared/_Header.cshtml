@@ -1,0 +1,174 @@
+@* Header Styles *@
+<link rel="stylesheet" href="~/dt-list-menu.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/dt-search.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/dt-menu-drawer.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/dt-cart-notification.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/dt-cart-items.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/disclosure.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/dt-mega-menu.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/dt-cart-drawer.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/dt-cart.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/dt-totals.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/dt-price.css" asp-append-version="true" />
+
+<style>
+    .header {
+        background: #ffffff;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .header__heading-logo {
+        max-width: 150px;
+    }
+    .header__icons {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    .header__icon {
+        position: relative;
+        cursor: pointer;
+    }
+    .cart-count-bubble {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #e74c3c;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+    }
+    .header__menu {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .header__menu-item a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+    .header__menu-item a:hover {
+        color: #e74c3c;
+    }
+    .header__search {
+        position: relative;
+    }
+    .mobile-nav-toggle {
+        display: none;
+    }
+
+    @@media (max-width: 768px) {
+        .header__menu {
+            display: none;
+        }
+        .mobile-nav-toggle {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    }
+</style>
+
+<header class="header header--middle-left" data-sticky-type="on-scroll-up">
+    <div class="page-width">
+        <div class="header-row">
+            @* Logo *@
+            <div class="header__heading">
+                <a href="@Url.Action("Index", "Home")" class="header__heading-link">
+                    <h1 class="header__heading-logo">
+                        <span style="font-size: 24px; font-weight: bold; color: #2c3e50;">
+                            <i class="fa fa-trophy" style="color: #e74c3c;"></i> Billiard Shop
+                        </span>
+                    </h1>
+                </a>
+            </div>
+
+            @* Main Navigation *@
+            <nav class="header__inline-menu">
+                <ul class="header__menu list-menu" role="list">
+                    <li class="header__menu-item">
+                        <a href="@Url.Action("Index", "Home")" class="header__menu-item-link">
+                            Trang chủ
+                        </a>
+                    </li>
+                    <li class="header__menu-item">
+                        <a href="@Url.Action("Index", "Product")" class="header__menu-item-link">
+                            Sản phẩm
+                        </a>
+                    </li>
+                    <li class="header__menu-item">
+                        <a href="#" class="header__menu-item-link">
+                            Về chúng tôi
+                        </a>
+                    </li>
+                    <li class="header__menu-item">
+                        <a href="#" class="header__menu-item-link">
+                            Liên hệ
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            @* Header Icons *@
+            <div class="header__icons">
+                @* Search Icon *@
+                <div class="header__icon header__icon--search">
+                    <button type="button" class="header__search-toggle" aria-label="Tìm kiếm">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+
+                @* Wishlist Icon *@
+                <div class="header__icon header__icon--wishlist">
+                    <a href="#" aria-label="Danh sách yêu thích">
+                        <i class="fa fa-heart-o"></i>
+                    </a>
+                </div>
+
+                @* Cart Icon *@
+                <div class="header__icon header__icon--cart">
+                    <a href="@Url.Action("Index", "Cart")" class="header__icon-cart" aria-label="Giỏ hàng">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="cart-count-bubble">
+                            @* This will be populated dynamically *@
+                            <span class="cart-count">0</span>
+                        </span>
+                    </a>
+                </div>
+
+                @* Mobile Menu Toggle *@
+                <button type="button" class="mobile-nav-toggle" aria-label="Menu">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+@* Search Modal - can be implemented later *@
+<div class="search-modal" style="display: none;">
+    <div class="search-modal__content">
+        <form action="@Url.Action("Index", "Product")" method="get" class="search">
+            <input type="search" name="search" placeholder="Tìm kiếm sản phẩm..." class="search__input" />
+            <button type="submit" class="search__button">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</div>

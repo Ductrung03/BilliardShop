@@ -1,0 +1,121 @@
+<div id="mySidenav" class="sidenav" >
+   <div class="sidenav-wrapper gradient color-scheme-1">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+        <svg id="Group_24924" data-name="Group 24924" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 25 25">
+            <defs>
+            <clipPath id="clip-path">
+            <rect id="Rectangle_8252" data-name="Rectangle 8252" width="18" height="18" fill="currentcolor"></rect>
+            </clipPath>
+            </defs>
+            <g id="Group_24923" data-name="Group 24923">
+            <path id="Path_38934" data-name="Path 38934" d="M23.214,25a1.78,1.78,0,0,1-1.263-.523L.523,3.048A1.786,1.786,0,0,1,3.048.523L24.477,21.952A1.786,1.786,0,0,1,23.214,25" transform="translate(0)" fill="currentcolor"></path>
+            <path id="Path_38935" data-name="Path 38935" d="M1.786,25A1.786,1.786,0,0,1,.523,21.952L21.952.523a1.786,1.786,0,1,1,2.525,2.525L3.048,24.477A1.78,1.78,0,0,1,1.786,25" transform="translate(0 0)" fill="currentcolor"></path>
+            </g>
+            </svg>
+      </a>
+         {% if section.settings.side_img_1 != blank or
+           section.settings.side_img_2 != blank or
+           section.settings.side_img_3 != blank or
+           section.settings.side_img_4 != blank or
+           section.settings.side_img_5 != blank or
+           section.settings.side_img_6 != blank %}
+           
+        {% if section.settings.instgram_title != blank %}
+          <h3 class="insta-heading common-color-heading">{{ section.settings.instgram_title }}</h3> 
+        {% endif %}
+        <div class="img_grid">
+        {% if section.settings.side_img_1 != blank %}
+            <li class="insta-bar__item"><img src="{{ section.settings.side_img_1 | image_url: width: 350 }}" width="{{ section.settings.side_img_1.width }}" height="{{ section.settings.side_img_1.height }}" loading="lazy">
+              <div class="image-overlay"><a href="{{ link.url }}"><i class="fa fa-instagram"></i></a></div>
+            </li>
+        {% endif %}
+         {% if section.settings.side_img_2 != blank %}
+            <li class="insta-bar__item"><img src="{{ section.settings.side_img_2 | image_url: width: 350 }}" width="{{ section.settings.side_img_2.width }}" height="{{ section.settings.side_img_2.height }}" loading="lazy">
+              <div class="image-overlay"><a href="{{ link.url }}"><i class="fa fa-instagram"></i></a></div>
+            </li>
+         {% endif %}
+         {% if section.settings.side_img_3 != blank %}
+            <li class="insta-bar__item"><img src="{{ section.settings.side_img_3 | image_url: width: 350 }}" width="{{ section.settings.side_img_3.width }}" height="{{ section.settings.side_img_3.height }}" loading="lazy">
+              <div class="image-overlay"><a href="{{ link.url }}"><i class="fa fa-instagram"></i></a></div>
+            </li>
+         {% endif %}
+         {% if section.settings.side_img_4 != blank %}
+            <li class="insta-bar__item"><img src="{{ section.settings.side_img_4 | image_url: width: 350 }}" width="{{ section.settings.side_img_4.width }}" height="{{ section.settings.side_img_4.height }}" loading="lazy">
+              <div class="image-overlay"><a href="{{ link.url }}"><i class="fa fa-instagram"></i></a></div>
+            </li>
+         {% endif %}
+         {% if section.settings.side_img_5 != blank %}
+            <li class="insta-bar__item"><img src="{{ section.settings.side_img_5 | image_url: width: 350 }}" width="{{ section.settings.side_img_5.width }}" height="{{ section.settings.side_img_5.height }}" loading="lazy">
+              <div class="image-overlay"><a href="{{ link.url }}"><i class="fa fa-instagram"></i></a></div>
+            </li>
+         {% endif %}
+         {% if section.settings.side_img_6 != blank %}
+            <li class="insta-bar__item"><img src="{{ section.settings.side_img_6 | image_url: width: 350 }}" width="{{ section.settings.side_img_6.width }}" height="{{ section.settings.side_img_6.height }}" loading="lazy">
+              <div class="image-overlay"><a href="{{ link.url }}"><i class="fa fa-instagram"></i></a></div>
+            </li> 
+          {% endif %}
+      </div>
+      {% endif %}
+      {% if section.settings.enable_social_icons %}
+      <div class="soical-blocks">
+       {% if section.settings.sidebar_social-heading != blank %}<h3 class="social-heading common-color-heading">{{ section.settings.sidebar_social-heading }}</h3>{% endif %}
+      <ul class="circle-social-icons dt-sc-social-icons  dt-sc-list-inline">{% render 'social-icons' %}</ul>
+      </div>
+      {% endif %}
+      
+     {% if section.settings.sidebar_phone_no or section.settings.sidebar_mail_id != blank %}
+        <div class="contact-info">
+            <div class="heading"><h3 class="contact-info-heading common-color-heading">{{ section.settings.sidebar_contact-heading }}</h3> 
+            </div>
+            {% if section.settings.sidebar_phone_no != blank %}
+                <div class="header-phone">
+                    <p>{{ section.settings.sidebar_phone_no_heading }}: <a href="tel:{{ section.settings.sidebar_phone_no }}">{{ section.settings.sidebar_phone_no }}</a></p>
+                </div>
+            {% endif %}
+            {% if section.settings.sidebar_mail_id != blank %}
+              <div class="header-email">
+                <p>{{ section.settings.sidebar_mail_id_heading }}: <a href="mailto:{{ section.settings.sidebar_mail_id }}">{{ section.settings.sidebar_mail_id }}</a></p>
+              </div>
+            {% endif %}
+        </div>
+     {% endif %}
+      </div>
+      </div>    
+<style>
+.header__icons .sidenav { position: fixed;  z-index: 1000;    left: 0;    top: 0;    width: 100vw;    height: 100vh;    display: flex;    justify-content: flex-end;  transition: visibility var(--duration-default) linear;  visibility: hidden;    overflow:hidden;opacity:0;background-color: rgba(var(--color-background), .6);backdrop-filter: blur(3px);}
+.sidenav.active {visibility: visible;opacity:1;}  
+.header__icons #openDrawerButton :is(svg,svg>*){ transition: all .3s ease-in-out;}
+.header__icons #openDrawerButton {  background: transparent; border: none; padding: 0; color: rgb(var(--color-foreground));}  
+.header__icons #openDrawerButton:hover > svg {color: rgb(var(--color-button));}
+/* .header__icons #openDrawerButton.navbg:after {content: "";position: fixed; top: 0; bottom: 0; left: 0;right: 0; background-color: rgba(var(--color-foreground),.5); width: 100%;height: 100%;z-index: 16;}   */
+.header__icons .sidenav .list-social__item {list-style: none;float: left;padding: 0;}  
+.sidenav.active .sidenav-wrapper { transform: translate(0);}
+.sidenav .sidenav-wrapper {height: 100vh; width: 45rem; max-width: calc(100vw - 3rem); border-left: 0.1rem solid rgba(var(--color-foreground),.2);border-right: 0;overflow: hidden; display: flex;flex-direction: column;transform: translate(100%);transition: transform var(--duration-default) ease; overflow-y: scroll; padding: 30px;}
+.sidenav .closebtn{display: flex;padding: 0; min-width: 1.6rem; min-height: 1.6rem; box-shadow: 0 0 0 0.2rem rgba(var(--color-button),0);  position: absolute; top: 15px;    right: 15px;    color: rgb(var(--color-button));    background-color: transparent;    border: none;    cursor: pointer;    align-items: center;    justify-content: center;border: 0.1rem solid rgb(var(--color-border), 0.15);}
+.sidenav .closebtn svg{width:1.4rem;height:1.4rem;}
+.sidenav .closebtn:hover{border: 0.1rem solid rgb(var(--color-button), 1);transition-timing-function: cubic-bezier(.47,2.02,.31,-.36);}
+.sidenav .soical-blocks .social-heading{margin:0 0 20px;}
+.sidenav .soical-blocks .dt-sc-social-icons{padding:0;margin:0;display: flex; flex-wrap: wrap; row-gap: 1rem;} 
+.sidenav .soical-blocks, .sidenav .contact-info, .sidenav .img_grid{margin-top:30px;} 
+.sidenav .insta-heading+.img_grid { margin-top: 0;}
+.sidenav .insta-heading{margin-bottom:20px; margin-top: 0;}
+.sidenav  .contact-info .heading .contact-info-heading{margin:0 0 20px;}
+.header__icons .sidenav .list-social__item .list-social__link{width: 40px;height: 40px; padding: 0; border-radius: 0; justify-content: center; border: 1px solid rgb(var(--color-foreground), .15); color: rgb(var(--color-button));}
+.header__icons .sidenav .list-social__item .icon{width:2rem;height:2rem;}
+.header__icons .sidenav .list-social__item .list-social__link:hover{ border-color:rgba(var(--color-button)); transition-timing-function: cubic-bezier(0.47,2.02,.31,-.36);}
+.header__icons .sidenav .contact-info div p{margin:0;}
+.header__icons .sidenav .contact-info .header-phone{margin-bottom:10px;} 
+.header__icons .sidenav .button.sidebar-button{    color: rgba(var(--color-button-hover-text));}
+  
+.img_grid .insta-bar__item {list-style:none;    position: relative;display:flex;border-radius: var(--media-radius); overflow: hidden;border: 1px solid rgb(var(--color-foreground), .15);} 
+.img_grid .insta-bar__item img{width:100%;height:100%;border-radius: var(--media-radius);}  
+.img_grid .insta-bar__item:hover .image-overlay i{ opacity:1;transition:all 0.3s linear; }
+.img_grid .insta-bar__item .image-overlay i{transition:all 0.3s linear;  font-size: 20px;  opacity: 0;}  
+.img_grid .insta-bar__item .image-overlay { position: absolute; height: 100%; width: 100%;  display: grid; align-content: center;  justify-content: center; top: 0;  left: 0; gap: 15px;  opacity: 1;background:rgba(var(--color-secondary-button),0.8);transition: all 0.3s linear;opacity:0;transform: scale(0.85);-webkit-transform: scale(0.8);border-radius: inherit;}
+.img_grid .insta-bar__item:hover .image-overlay{ opacity:1;transform: scale(1);-webkit-transform: scale(1);}
+.img_grid .insta-bar__item .image-overlay a{color: rgba(var(--color-button), 1);    border: 1px solid rgba(var(--color-foreground), 0.15);    border-radius: 0;    width: 4rem;    height: 4rem;    display: inline-flex;    align-items: center;    justify-content: center;}
+.img_grid .insta-bar__item .image-overlay a>i{ color:inherit;}
+.img_grid .insta-bar__item .image-overlay a:hover{ border: 1px solid rgba(var(--color-button), 1);transition-timing-function: cubic-bezier(0.47,2.02,.31,-.36);}
+.img_grid{ display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 15px; }  
+   
+</style>      
