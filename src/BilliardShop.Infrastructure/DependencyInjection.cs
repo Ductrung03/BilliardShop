@@ -5,6 +5,8 @@ using BilliardShop.Domain.Interfaces;
 using BilliardShop.Domain.Interfaces.Repositories;
 using BilliardShop.Infrastructure.Data;
 using BilliardShop.Infrastructure.Repositories;
+using BilliardShop.Infrastructure.Services;
+using BilliardShop.Application.Interfaces.Services;
 
 namespace BilliardShop.Infrastructure;
 
@@ -61,6 +63,13 @@ public static class DependencyInjection
 
         // Register Unit of Work
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        // Register Services
+        services.AddScoped<ICaiDatHeThongService, CaiDatHeThongService>();
+        services.AddScoped<IVaiTroNguoiDungService, VaiTroNguoiDungService>();
+        services.AddScoped<INguoiDungService, NguoiDungService>();
+        services.AddScoped<IThuongHieuService, ThuongHieuService>();
+        services.AddScoped<IDanhMucSanPhamService, DanhMucSanPhamService>();
 
         return services;
     }

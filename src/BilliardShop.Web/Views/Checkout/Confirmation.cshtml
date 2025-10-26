@@ -1,0 +1,110 @@
+@model OrderConfirmationViewModel
+@{
+    ViewData["Title"] = "Xác nhận đơn hàng";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <div class="mb-3">
+                    <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                </div>
+                <h2 class="text-success">Đặt hàng thành công!</h2>
+                <p class="text-muted">Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi</p>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin đơn hàng</h5>
+                    <hr>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted">Mã đơn hàng:</div>
+                        <div class="col-sm-8 fw-bold">@Model.OrderNumber</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted">Ngày đặt:</div>
+                        <div class="col-sm-8">@Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted">Trạng thái:</div>
+                        <div class="col-sm-8">
+                            <span class="badge bg-warning text-dark">@Model.TrangThaiDonHang</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin nhận hàng</h5>
+                    <hr>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted">Người nhận:</div>
+                        <div class="col-sm-8">@Model.TenNguoiNhan</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted">Số điện thoại:</div>
+                        <div class="col-sm-8">@Model.SoDienThoai</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted">Địa chỉ:</div>
+                        <div class="col-sm-8">@Model.DiaChiGiaoHang</div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.GhiChu))
+                    {
+                        <div class="row mb-2">
+                            <div class="col-sm-4 text-muted">Ghi chú:</div>
+                            <div class="col-sm-8">@Model.GhiChu</div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Chi tiết đơn hàng</h5>
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th class="text-center">Số lượng</th>
+                                    <th class="text-end">Đơn giá</th>
+                                    <th class="text-end">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td>@item.TenSanPham</td>
+                                        <td class="text-center">@item.SoLuong</td>
+                                        <td class="text-end">@item.Gia.ToString("N0") đ</td>
+                                        <td class="text-end">@item.ThanhTien.ToString("N0") đ</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Tổng cộng:</strong></td>
+                                    <td class="text-end"><strong class="text-danger fs-5">@Model.TongTien.ToString("N0") đ</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+                    <i class="bi bi-house"></i> Về trang chủ
+                </a>
+                <a href="@Url.Action("Index", "Product")" class="btn btn-outline-primary">
+                    <i class="bi bi-cart"></i> Tiếp tục mua hàng
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

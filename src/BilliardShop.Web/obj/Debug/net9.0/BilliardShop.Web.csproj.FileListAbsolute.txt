@@ -225,3 +225,5 @@
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Web/obj/Debug/net9.0/BilliardShop.Web.pdb
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Web/obj/Debug/net9.0/BilliardShop.Web.genruntimeconfig.cache
 /home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Web/obj/Debug/net9.0/ref/BilliardShop.Web.dll
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Web/bin/Debug/net9.0/AutoMapper.dll
+/home/luckyboiz/LuckyBoiz/Projects/Asp.net_MVC/BilliardShop/src/BilliardShop.Web/bin/Debug/net9.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

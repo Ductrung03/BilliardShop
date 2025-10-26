@@ -1,8 +1,83 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model BilliardShop.Web.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Billiard Shop - Trang chủ";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <!-- Categories Section -->
+    <section class="categories-section mb-5">
+        <h2 class="section-title mb-4">Danh mục sản phẩm</h2>
+        <div class="row">
+            @foreach (var category in Model.Categories)
+            {
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <a asp-controller="Product" asp-action="Index" asp-route-categorySlug="@category.DuongDanDanhMuc" class="category-card text-decoration-none">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                @if (!string.IsNullOrEmpty(category.HinhAnhDaiDien))
+                                {
+                                    <img src="@category.HinhAnhDaiDien" alt="@category.TenDanhMuc" class="img-fluid mb-3" style="max-height: 150px;">
+                                }
+                                <h5 class="card-title">@category.TenDanhMuc</h5>
+                                @if (!string.IsNullOrEmpty(category.MoTa))
+                                {
+                                    <p class="card-text text-muted small">@category.MoTa</p>
+                                }
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products-section">
+        <h2 class="section-title mb-4">Sản phẩm nổi bật</h2>
+        <div class="row">
+            @foreach (var product in Model.FeaturedProducts)
+            {
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card h-100">
+                        <a asp-controller="Product" asp-action="Details" asp-route-slug="@product.DuongDanSanPham">
+                            @if (product.HinhAnhs.Any())
+                            {
+                                <img src="@product.HinhAnhs.First().DuongDanHinhAnh" class="card-img-top" alt="@product.TenSanPham" style="height: 250px; object-fit: cover;">
+                            }
+                            else
+                            {
+                                <img src="/images/no-image.png" class="card-img-top" alt="No image" style="height: 250px; object-fit: cover;">
+                            }
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a asp-controller="Product" asp-action="Details" asp-route-slug="@product.DuongDanSanPham" class="text-decoration-none text-dark">
+                                    @product.TenSanPham
+                                </a>
+                            </h5>
+                            @if (!string.IsNullOrEmpty(product.MoTaNgan))
+                            {
+                                <p class="card-text text-muted small">@product.MoTaNgan</p>
+                            }
+                            <div class="price-section mt-3">
+                                @if (product.GiaKhuyenMai.HasValue)
+                                {
+                                    <span class="text-danger fw-bold">@product.GiaKhuyenMai.Value.ToString("N0") đ</span>
+                                    <span class="text-muted text-decoration-line-through ms-2">@product.GiaGoc.ToString("N0") đ</span>
+                                }
+                                else
+                                {
+                                    <span class="fw-bold">@product.GiaGoc.ToString("N0") đ</span>
+                                }
+                            </div>
+                            @if (product.SoLuongTonKho <= 0)
+                            {
+                                <span class="badge bg-secondary mt-2">Hết hàng</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
 </div>
